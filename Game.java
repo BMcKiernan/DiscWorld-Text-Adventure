@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+    private String lastDirection; 
     /**
      * Create the game and initialise its internal map.
      */
@@ -151,7 +151,7 @@ public class Game
         }
 
         String direction = command.getSecondWord();
-
+        lastDirection = direction;
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
 
@@ -164,6 +164,61 @@ public class Game
         }
     }
 
+    
+     public void goBack()    
+    {
+        String directionBack;
+        Room lastRoom;
+        if(lastDirection.equalsIgnoreCase("North")){
+           directionBack = "South";
+           lastRoom = currentRoom.getExit(directionBack);
+           if (lastRoom == null) {
+                System.out.println("There is no door!");
+           }
+            else {
+                currentRoom = lastRoom;
+                System.out.println(currentRoom.getLongDescription());
+           }
+        }
+        else if(lastDirection.equalsIgnoreCase("South")){
+           directionBack = "North";
+           lastRoom = currentRoom.getExit(directionBack);
+           if (lastRoom == null) {
+                System.out.println("There is no door!");
+           }
+           else {
+                currentRoom = lastRoom;
+                System.out.println(currentRoom.getLongDescription());
+           }
+        }
+        else if(lastDirection.equalsIgnoreCase("West")){
+           directionBack = "East";
+           lastRoom = currentRoom.getExit(directionBack);
+           if (lastRoom == null) {
+                System.out.println("There is no door!");
+           }
+           else {
+                currentRoom = lastRoom;
+                System.out.println(currentRoom.getLongDescription());
+           }
+        }
+        else if (lastDirection.equalsIgnoreCase("East")){
+            directionBack =  "West";
+            lastRoom = currentRoom.getExit(directionBack);
+            if(lastRoom == null) {
+                System.out.println("There is no door!");
+            }
+            else {
+                currentRoom = lastRoom;
+                System.out.println(currentRoom.getLongDescription());
+            }
+        }
+        else{
+            System.out.println("Ummmm what?");
+        }
+
+    }
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
