@@ -81,7 +81,14 @@ public class Game
         
         bathroom.setExit("north",mainEntrance);
         
-        kitchen.setExit("south",cellar);
+        kitchen.setExit("down",cellar);
+        kitchen.setExit("north",greatHall);
+        
+        cellar.setExit("up",kitchen);
+        
+        towerBase.setExit("west",courtyard);
+        
+        libraryEntrance.setExit("south",courtyard);
 
         currentRoom = courtyard;  // start game outside
     }
