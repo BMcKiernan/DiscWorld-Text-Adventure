@@ -118,6 +118,10 @@ public class Game
             case QUIT:
                 wantToQuit = quit(command);
                 break;
+
+            case LOOK:
+                look();
+                break;
         }
         return wantToQuit;
     }
@@ -162,6 +166,11 @@ public class Game
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+    }
+    private void look()
+    {
+        System.out.println(currentRoom.getLongDescription());
+        
     }
 
     /** 
