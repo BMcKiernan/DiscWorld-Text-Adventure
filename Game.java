@@ -1,3 +1,4 @@
+import java.util.HashMap;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,6 +20,9 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private String lastDirection; 
+    HashMap<String, String> reverseDirection = new HashMap<>();
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -65,6 +69,14 @@ public class Game
         
         cellar = new Room("in the cellar below the kitchen. It is somewhat damp, and you see water on the floor from the east");
         // initialise room exits
+        
+        reverseDirection.put("north","south");
+        reverseDirection.put("south","north");
+        reverseDirection.put("west","east");
+        reverseDirection.put("east","west");
+        reverseDirection.put("up","down");
+        reverseDirection.put("down","up");
+        
         courtyard.setExit("south",field);
         courtyard.setExit("north",libraryEntrance);
         courtyard.setExit("east",towerBase);
@@ -89,6 +101,7 @@ public class Game
         towerBase.setExit("west",courtyard);
         
         libraryEntrance.setExit("south",courtyard);
+
 
         currentRoom = courtyard;  // start game outside
     }
@@ -143,6 +156,10 @@ public class Game
             case HELP:
                 printHelp();
                 break;
+                
+            case BACK:
+                goBack();
+                break;
 
             case GO:
                 goRoom(command);
@@ -188,7 +205,8 @@ public class Game
         }
 
         String direction = command.getSecondWord();
-
+        //if(command.getSecondWord();)
+        lastDirection = direction;
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
         Room prevRoom = currentRoom;
@@ -201,11 +219,34 @@ public class Game
             System.out.println(currentRoom.getLongDescription());
         }
     }
+    
     private void look()
     {
         System.out.println(currentRoom.getLongDescription());
     }
 
+    /**
+     * Method goBack sends player back to the last room.
+     */
+    private void goBack()    
+    {
+        System.out.println(lastDirection);
+        String directionBack = reverseDirection.get(lastDirection);
+        
+        Room lastRoom = currentRoom.getExit(directionBack);
+        if (lastRoom == null) {
+            System.out.println("There is no door!");
+        }
+        else {
+            currentRoom = lastRoom;
+            lastDirection = directionBack;
+            System.out.println(currentRoom.getLongDescription());
+        }
+        
+    }
+
+    
+    
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
