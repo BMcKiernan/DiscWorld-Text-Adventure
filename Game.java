@@ -113,6 +113,7 @@ public class Game
                 
             case BACK:
                 goBack();
+                break;
 
             case GO:
                 goRoom(command);
