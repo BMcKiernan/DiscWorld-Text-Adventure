@@ -279,6 +279,9 @@ public class Game
         }
     }
     
+    /**
+     * This method implements the look command which displays the current rooms long description.
+     */
     private void look()
     {
         System.out.println(currentRoom.getLongDescription());
