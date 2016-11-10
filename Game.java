@@ -19,7 +19,6 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
     /**
      * Create the game and initialise its internal map.
      */
@@ -34,30 +33,64 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, courtyard, libraryEntrance, libraryS, librarySE,
+             libraryE, libraryNE, libraryN, libraryNW, libraryW, librarySW, libraryC, field, towerBase,
+             towerMain, towerTop, mainEntrance, bathroom, greatHall, kitchen, cellar;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+
+        courtyard = new Room("in the main courtyard of the Unseen University");
         
+        libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk");
+        libraryS = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        librarySE = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        libraryE = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        libraryNE = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        libraryN = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        libraryNW = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        libraryW = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        librarySW = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        libraryC = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        
+        field = new Room("in the main courtyard of the Unseen University");
+        
+        towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you");
+        towerMain = new Room("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you");
+        towerTop = new Room("at the top of the Tower of Art. You have climbed all 8,888 stairs to get here");
+        
+        mainEntrance = new Room("in the entrance to the main building at the Unseen University");
+        bathroom = new Room("in the Archchancellor's bathroom, built by Bloody Stupid Johnson");
+        greatHall = new Room("in the Great Hall of the Unseen University.  Unfortunately, it isn't mealtime now");
+        kitchen = new Room("in the Unseen University's kitchen");
+        
+        cellar = new Room("in the cellar below the kitchen. It is somewhat damp, and you see water on the floor from the east");
         // initialise room exits
-        outside.setExit("east", theater);
-        outside.setExit("south", lab);
-        outside.setExit("west", pub);
+        courtyard.setExit("south",field);
+        courtyard.setExit("north",libraryEntrance);
+        courtyard.setExit("east",towerBase);
+        courtyard.setExit("west",mainEntrance);
+        
+        field.setExit("north",courtyard);
+        
+        mainEntrance.setExit("east",courtyard);
+        mainEntrance.setExit("west",greatHall);
+        mainEntrance.setExit("south",bathroom);
+        
+        greatHall.setExit("east",mainEntrance);
+        greatHall.setExit("south",kitchen);
+        
+        bathroom.setExit("north",mainEntrance);
+        
+        kitchen.setExit("down",cellar);
+        kitchen.setExit("north",greatHall);
+        
+        cellar.setExit("up",kitchen);
+        
+        towerBase.setExit("west",courtyard);
+        
+        libraryEntrance.setExit("south",courtyard);
 
-        theater.setExit("west", outside);
-
-        pub.setExit("east", outside);
-
-        lab.setExit("north", outside);
-        lab.setExit("east", office);
-
-        office.setExit("west", lab);
-
-        currentRoom = outside;  // start game outside
+        currentRoom = courtyard;  // start game outside
     }
 
     /**
@@ -158,6 +191,7 @@ public class Game
 
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
+        Room prevRoom = currentRoom;
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -170,7 +204,6 @@ public class Game
     private void look()
     {
         System.out.println(currentRoom.getLongDescription());
-        
     }
 
     /** 
