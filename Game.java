@@ -1,3 +1,4 @@
+import java.util.HashMap;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -56,6 +57,12 @@ public class Game
         lab.setExit("east", office);
 
         office.setExit("west", lab);
+        
+        HashMap<String, String> reverseDirection = new HashMap<>();
+        reverseDirection.put("north","south");
+        reverseDirection.put("south","north");
+        reverseDirection.put("west","east");
+        reverseDirection.put("east","west");
 
         currentRoom = outside;  // start game outside
     }
@@ -172,57 +179,10 @@ public class Game
     
     private void goBack()    
     {
-        String directionBack;
-        Room lastRoom;
-        if(lastDirection.equalsIgnoreCase("North")){
-           directionBack = "South";
-           lastRoom = currentRoom.getExit(directionBack);
-           if (lastRoom == null) {
-                System.out.println("There is no door!");
-           }
-            else {
-                currentRoom = lastRoom;
-                System.out.println(currentRoom.getLongDescription());
-           }
-        }
-        else if(lastDirection.equalsIgnoreCase("South")){
-           directionBack = "North";
-           lastRoom = currentRoom.getExit(directionBack);
-           if (lastRoom == null) {
-                System.out.println("There is no door!");
-           }
-           else {
-                currentRoom = lastRoom;
-                System.out.println(currentRoom.getLongDescription());
-           }
-        }
-        else if(lastDirection.equalsIgnoreCase("West")){
-           directionBack = "East";
-           lastRoom = currentRoom.getExit(directionBack);
-           if (lastRoom == null) {
-                System.out.println("There is no door!");
-           }
-           else {
-                currentRoom = lastRoom;
-                System.out.println(currentRoom.getLongDescription());
-           }
-        }
-        else if (lastDirection.equalsIgnoreCase("East")){
-            directionBack =  "West";
-            lastRoom = currentRoom.getExit(directionBack);
-            if(lastRoom == null) {
-                System.out.println("There is no door!");
-            }
-            else {
-                currentRoom = lastRoom;
-                System.out.println(currentRoom.getLongDescription());
-            }
-        }
-        else{
-            System.out.println("Ummmm what?");
+        
         }
 
-    }
+    
     
     /** 
      * "Quit" was entered. Check the rest of the command to see
