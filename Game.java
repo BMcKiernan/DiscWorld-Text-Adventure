@@ -101,7 +101,33 @@ public class Game
         towerBase.setExit("west",courtyard);
         
         libraryEntrance.setExit("south",courtyard);
+        libraryEntrance.setExit("north",libraryS);
 
+        libraryS.setExit("south",libraryEntrance);
+        libraryS.setExit("east",librarySE);
+        libraryS.setExit("west",librarySW);
+        libraryS.setExit("north",libraryC);
+        librarySE.setExit("west",libraryS);
+        librarySE.setExit("north",libraryE);
+        libraryE.setExit("south",librarySE);
+        libraryE.setExit("west",libraryC);
+        libraryE.setExit("north",libraryNE);
+        libraryNE.setExit("south",libraryE);
+        libraryNE.setExit("west",libraryN);
+        libraryN.setExit("south",libraryC);
+        libraryN.setExit("east",libraryNE);
+        libraryN.setExit("west",libraryNW);
+        libraryNW.setExit("south",libraryW);
+        libraryNW.setExit("east",libraryN);
+        libraryW.setExit("south",librarySW);
+        libraryW.setExit("east",libraryC);
+        libraryW.setExit("north",libraryNW);
+        librarySW.setExit("east",libraryS);
+        librarySW.setExit("north",libraryW);
+        libraryC.setExit("south",libraryS);
+        libraryC.setExit("east",libraryE);
+        libraryC.setExit("west",libraryW);
+        libraryC.setExit("north",libraryN);
 
         currentRoom = courtyard;  // start game outside
     }
