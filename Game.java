@@ -38,8 +38,10 @@ public class Game
     private void createRooms()
     {
         Room outside, theater, pub, lab, office, courtyard, libraryEntrance, libraryS, librarySE,
-             libraryE, libraryNE, libraryN, libraryNW, libraryW, librarySW, libraryC, field, towerBase,
-             towerMain, towerTop, mainEntrance, bathroom, greatHall, kitchen, cellar;
+             libraryE, libraryNE, libraryN, libraryNW, libraryW, librarySW, libraryC, lowerLibraryS, 
+             lowerLibrarySE, lowerLibraryE, lowerLibraryNE, lowerLibraryN, lowerLibraryNW, lowerLibraryW, 
+             lowerLibrarySW, lowerLibraryC, field, towerBase, towerMain, towerTop, mainEntrance, 
+             bathroom, greatHall, kitchen, cellar;
       
         // create the rooms
 
@@ -56,6 +58,16 @@ public class Game
         librarySW = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
         libraryC = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
         
+        lowerLibraryS = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+        lowerLibrarySE = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+        lowerLibraryE = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+        lowerLibraryNE = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+        lowerLibraryN = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+        lowerLibraryNW = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+        lowerLibraryW = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+        lowerLibrarySW = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+        lowerLibraryC = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
+
         field = new Room("in the main courtyard of the Unseen University");
         
         towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you");
@@ -101,6 +113,53 @@ public class Game
         towerBase.setExit("west",courtyard);
         
         libraryEntrance.setExit("south",courtyard);
+        libraryEntrance.setExit("north",libraryS);
+
+        libraryS.setExit("south",libraryEntrance);
+        libraryS.setExit("east",librarySE);
+        libraryS.setExit("west",librarySW);
+        libraryS.setExit("north",libraryC);
+        librarySE.setExit("west",libraryS);
+        librarySE.setExit("north",libraryE);
+        libraryE.setExit("south",librarySE);
+        libraryE.setExit("west",libraryC);
+        libraryE.setExit("north",libraryNE);
+        libraryNE.setExit("south",libraryE);
+        libraryNE.setExit("west",libraryN);
+        libraryN.setExit("south",libraryC);
+        libraryN.setExit("east",libraryNE);
+        libraryN.setExit("west",libraryNW);
+        libraryNW.setExit("south",libraryW);
+        libraryNW.setExit("east",libraryN);
+        libraryW.setExit("south",librarySW);
+        libraryW.setExit("east",libraryC);
+        libraryW.setExit("north",libraryNW);
+        libraryW.setExit("down",lowerLibraryW);
+        librarySW.setExit("east",libraryS);
+        librarySW.setExit("north",libraryW);
+        libraryC.setExit("south",libraryS);
+        libraryC.setExit("east",libraryE);
+        libraryC.setExit("west",libraryW);
+        libraryC.setExit("north",libraryN);
+        
+
+        lowerLibraryS.setExit("west",lowerLibrarySW);
+        lowerLibraryS.setExit("north",lowerLibraryC);
+        lowerLibrarySE.setExit("north",lowerLibraryE);
+        lowerLibraryE.setExit("south",lowerLibrarySE);
+        lowerLibraryE.setExit("west",lowerLibraryC);
+        lowerLibraryNE.setExit("west",lowerLibraryN);
+        lowerLibraryN.setExit("south",lowerLibraryC);
+        lowerLibraryN.setExit("east",lowerLibraryNE);
+        lowerLibraryN.setExit("west",lowerLibraryNW);
+        lowerLibraryNW.setExit("south",lowerLibraryW);
+        lowerLibraryNW.setExit("east",lowerLibraryN);
+        lowerLibraryW.setExit("north",lowerLibraryNW);
+        lowerLibraryW.setExit("up",libraryW);
+        lowerLibrarySW.setExit("east",lowerLibraryS);
+        lowerLibraryC.setExit("south",lowerLibraryS);
+        lowerLibraryC.setExit("east",lowerLibraryE);
+        lowerLibraryC.setExit("north",lowerLibraryN);
 
 
         currentRoom = courtyard;  // start game outside
@@ -130,8 +189,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println("Welcome to Discworld!");
+        System.out.println("Discworld is a fascinating and magical, yet dangerout place.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getLongDescription());
