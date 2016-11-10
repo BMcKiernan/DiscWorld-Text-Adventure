@@ -21,6 +21,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private String lastDirection; 
+    HashMap<String, String> reverseDirection = new HashMap<>();
     /**
      * Create the game and initialise its internal map.
      */
@@ -58,7 +59,6 @@ public class Game
 
         office.setExit("west", lab);
         
-        HashMap<String, String> reverseDirection = new HashMap<>();
         reverseDirection.put("north","south");
         reverseDirection.put("south","north");
         reverseDirection.put("west","east");
@@ -176,11 +176,25 @@ public class Game
         }
     }
 
-    
+    /**
+     * Method goBack sends player back to the last room.
+     */
     private void goBack()    
     {
-        
+        System.out.println(lastDirection);
+        String directionBack = reverseDirection.get(lastDirection);
+        System.out.println(directionBack);
+        Room lastRoom = currentRoom.getExit(directionBack);
+        if (lastRoom == null) {
+            System.out.println("There is no door!");
         }
+        else {
+            currentRoom = lastRoom;
+            lastDirection = directionBack;
+            System.out.println(currentRoom.getLongDescription());
+        }
+        
+    }
 
     
     
