@@ -110,6 +110,9 @@ public class Game
             case HELP:
                 printHelp();
                 break;
+                
+            case BACK:
+                goBack();
 
             case GO:
                 goRoom(command);
@@ -151,6 +154,7 @@ public class Game
         }
 
         String direction = command.getSecondWord();
+        //if(command.getSecondWord();)
         lastDirection = direction;
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
@@ -165,7 +169,7 @@ public class Game
     }
 
     
-     public void goBack()    
+    private void goBack()    
     {
         String directionBack;
         Room lastRoom;
