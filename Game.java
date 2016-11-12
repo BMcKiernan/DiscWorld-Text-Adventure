@@ -23,6 +23,7 @@ public class Game
     private RoomWithFloors towerRoom;
     private String lastDirection; 
     HashMap<String, String> reverseDirection = new HashMap<>();
+    private Player rincewind;
 
     /**
      * Create the game and initialise its internal map.
@@ -310,6 +311,7 @@ public class Game
         if(currentRoom instanceof RoomWithFloors) {
             
                 if(((RoomWithFloors)currentRoom).moveFloors(direction)){
+                    System.out.println("You walk "+direction);
                     System.out.println(currentRoom.getLongDescription());
                 }
                 
@@ -320,6 +322,7 @@ public class Game
                         System.out.println("There is no door!");
                     }
                     else {
+                        System.out.println("You walk  "+direction);
                         currentRoom = nextRoom;
                         System.out.println(currentRoom.getLongDescription());
                     }
@@ -337,6 +340,7 @@ public class Game
                 System.out.println("There is no door!");
             }
             else {
+                System.out.println("You walk "+direction);
                 currentRoom = nextRoom;
                 System.out.println(currentRoom.getLongDescription());
             }
