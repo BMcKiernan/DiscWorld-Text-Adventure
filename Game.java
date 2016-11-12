@@ -231,6 +231,11 @@ public class Game
             case LOOK:
                 look();
                 break;
+                
+            case GIVE:
+                give(command);
+                break;
+                
         }
         return wantToQuit;
     }
@@ -285,6 +290,20 @@ public class Game
     private void look()
     {
         System.out.println(currentRoom.getLongDescription());
+    }
+    private void give(Command command)
+    {
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Give who what?");
+            return;
+        }
+        else if(!command.hasThirdWord()) {
+            System.out.println("Give " + command.getSecondWord() + "to whom?");
+        }
+        else {
+            
+        }
     }
 
     /**
