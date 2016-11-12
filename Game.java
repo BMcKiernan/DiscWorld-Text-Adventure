@@ -350,6 +350,7 @@ public class Game
     {
         System.out.println(currentRoom.getLongDescription());
     }
+    
     private void give(Command command)
     {
         if(!command.hasSecondWord()) {
