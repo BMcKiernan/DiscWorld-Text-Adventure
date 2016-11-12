@@ -9,15 +9,53 @@ import java.util.Iterator;
  */
 public class RoomWithFloors extends Room
 {
-    private int floors;
+    private int maxFloors;
+    private int currentFloor;
     /**
      * Constructor for objects of class RoomWithFloors
      */
-    public RoomWithFloors(String description, int floors)
+    public RoomWithFloors(String description, int maxFloors)
     {
         super(description);
-        this.floors=floors;
+        this.maxFloors=maxFloors;
+        currentFloor=1;
     }
-
+    public int getMaxFloors() {
+        return maxFloors;
+    }
+    public int getCurrentFloor() {
+        return currentFloor;
+    }
+    public boolean goUp(){
+        if(currentFloor<maxFloors){
+            currentFloor++;
+            return true;
+        }
+        else {
+            return false;
+        }
+            
+    }
+    public boolean goDown(){
+        if(currentFloor>1){
+            currentFloor--;
+            return true;
+        }
+        else {
+            return false;
+        }
+            
+    }
+    public boolean moveFloors(String direction){
+        if(direction.equals("up")){
+            return goUp();
+        }
+        else if(direction.equals("down")) {
+            return goDown();
+        }
+        else{
+            return false;
+        }
+    }
  
 }

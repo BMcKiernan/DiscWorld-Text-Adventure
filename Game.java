@@ -20,6 +20,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private RoomWithFloors towerRoom;
     private String lastDirection; 
     HashMap<String, String> reverseDirection = new HashMap<>();
 
@@ -29,7 +30,16 @@ public class Game
     public Game() 
     {
         createRooms();
-        parser = new Parser();
+        parser = new Parser();       
+        
+        //reverse direction hashmap
+        reverseDirection.put("north","south");
+        reverseDirection.put("south","north");
+        reverseDirection.put("west","east");
+        reverseDirection.put("east","west");
+        reverseDirection.put("up","down");
+        reverseDirection.put("down","up");
+        
     }
 
     /**
@@ -40,9 +50,9 @@ public class Game
         Room outside, theater, pub, lab, office, courtyard, libraryEntrance, libraryS, librarySE,
              libraryE, libraryNE, libraryN, libraryNW, libraryW, librarySW, libraryC, lowerLibraryS, 
              lowerLibrarySE, lowerLibraryE, lowerLibraryNE, lowerLibraryN, lowerLibraryNW, lowerLibraryW, 
-             lowerLibrarySW, lowerLibraryC, field, towerBase, towerMain, towerTop, mainEntrance, 
+             lowerLibrarySW, lowerLibraryC, field, towerBase, towerTop, mainEntrance, 
              bathroom, greatHall, kitchen, cellar;
-      
+        RoomWithFloors towerMain;
         // create the rooms
 
         courtyard = new Room("in the main courtyard of the Unseen University");
@@ -71,7 +81,7 @@ public class Game
         field = new Room("in the main courtyard of the Unseen University");
         
         towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you");
-        towerMain = new Room("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you");
+        towerMain = new RoomWithFloors("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you",10);
         towerTop = new Room("at the top of the Tower of Art. You have climbed all 8,888 stairs to get here");
         
         mainEntrance = new Room("in the entrance to the main building at the Unseen University");
@@ -80,83 +90,109 @@ public class Game
         kitchen = new Room("in the Unseen University's kitchen");
         
         cellar = new Room("in the cellar below the kitchen. It is somewhat damp, and you see water on the floor from the east");
-        // initialise room exits
         
-        reverseDirection.put("north","south");
-        reverseDirection.put("south","north");
-        reverseDirection.put("west","east");
-        reverseDirection.put("east","west");
-        reverseDirection.put("up","down");
-        reverseDirection.put("down","up");
+
+        //Set exits for all rooms
         
         courtyard.setExit("south",field);
         courtyard.setExit("north",libraryEntrance);
         courtyard.setExit("east",towerBase);
         courtyard.setExit("west",mainEntrance);
         
+        
         field.setExit("north",courtyard);
+        
         
         mainEntrance.setExit("east",courtyard);
         mainEntrance.setExit("west",greatHall);
         mainEntrance.setExit("south",bathroom);
         
+        
         greatHall.setExit("east",mainEntrance);
         greatHall.setExit("south",kitchen);
         
+        
         bathroom.setExit("north",mainEntrance);
+        bathroom.addItem("Key",false);
+        
         
         kitchen.setExit("down",cellar);
         kitchen.setExit("north",greatHall);
         
+        
         cellar.setExit("up",kitchen);
         
+        
         towerBase.setExit("west",courtyard);
+        towerBase.setExit("up",towerMain);
+        
+        towerMain.setExit("up",towerTop);
+        towerMain.setExit("down",towerBase);
+        
+        
+        towerTop.setExit("down",towerMain);
+        
         
         libraryEntrance.setExit("south",courtyard);
         libraryEntrance.setExit("north",libraryS);
-
+        
         libraryS.setExit("south",libraryEntrance);
         libraryS.setExit("east",librarySE);
         libraryS.setExit("west",librarySW);
         libraryS.setExit("north",libraryC);
+        
         librarySE.setExit("west",libraryS);
         librarySE.setExit("north",libraryE);
+        
         libraryE.setExit("south",librarySE);
         libraryE.setExit("west",libraryC);
         libraryE.setExit("north",libraryNE);
+        
         libraryNE.setExit("south",libraryE);
         libraryNE.setExit("west",libraryN);
+        
         libraryN.setExit("south",libraryC);
         libraryN.setExit("east",libraryNE);
         libraryN.setExit("west",libraryNW);
+        
         libraryNW.setExit("south",libraryW);
         libraryNW.setExit("east",libraryN);
+        
         libraryW.setExit("south",librarySW);
         libraryW.setExit("east",libraryC);
         libraryW.setExit("north",libraryNW);
         libraryW.setExit("down",lowerLibraryW);
+        
         librarySW.setExit("east",libraryS);
         librarySW.setExit("north",libraryW);
+        
         libraryC.setExit("south",libraryS);
         libraryC.setExit("east",libraryE);
         libraryC.setExit("west",libraryW);
         libraryC.setExit("north",libraryN);
         
-
         lowerLibraryS.setExit("west",lowerLibrarySW);
         lowerLibraryS.setExit("north",lowerLibraryC);
+        
         lowerLibrarySE.setExit("north",lowerLibraryE);
+        
         lowerLibraryE.setExit("south",lowerLibrarySE);
         lowerLibraryE.setExit("west",lowerLibraryC);
+        
         lowerLibraryNE.setExit("west",lowerLibraryN);
+        
         lowerLibraryN.setExit("south",lowerLibraryC);
         lowerLibraryN.setExit("east",lowerLibraryNE);
         lowerLibraryN.setExit("west",lowerLibraryNW);
+        
         lowerLibraryNW.setExit("south",lowerLibraryW);
         lowerLibraryNW.setExit("east",lowerLibraryN);
+        
         lowerLibraryW.setExit("north",lowerLibraryNW);
         lowerLibraryW.setExit("up",libraryW);
+        
         lowerLibrarySW.setExit("east",lowerLibraryS);
+        
         lowerLibraryC.setExit("south",lowerLibraryS);
         lowerLibraryC.setExit("east",lowerLibraryE);
         lowerLibraryC.setExit("north",lowerLibraryN);
@@ -267,20 +303,43 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
+        
         String direction = command.getSecondWord();
         //if(command.getSecondWord();)
         lastDirection = direction;
-        // Try to leave current room.
-        Room nextRoom = currentRoom.getExit(direction);
-        Room prevRoom = currentRoom;
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
+        if(currentRoom instanceof RoomWithFloors) {
+            
+                if(((RoomWithFloors)currentRoom).moveFloors(direction)){
+                    System.out.println(currentRoom.getLongDescription());
+                }
+                
+                else{      
+                    Room nextRoom = currentRoom.getExit(direction);
+                    Room prevRoom = currentRoom;
+                    if (nextRoom == null) {
+                        System.out.println("There is no door!");
+                    }
+                    else {
+                        currentRoom = nextRoom;
+                        System.out.println(currentRoom.getLongDescription());
+                    }
+                    
+                }
+                
+        
         }
         else {
-            currentRoom = nextRoom;
-            System.out.println(currentRoom.getLongDescription());
+            // Try to leave current room.
+            Room nextRoom = currentRoom.getExit(direction);
+            Room prevRoom = currentRoom;
+    
+            if (nextRoom == null) {
+                System.out.println("There is no door!");
+            }
+            else {
+                currentRoom = nextRoom;
+                System.out.println(currentRoom.getLongDescription());
+            }
         }
     }
     
