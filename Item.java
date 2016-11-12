@@ -29,6 +29,7 @@ public class Item
    }
    
     /**
+
      * equip Method returns a boolean about whether or not an item is equipable.
      */
    private boolean isItemEquipable(){
