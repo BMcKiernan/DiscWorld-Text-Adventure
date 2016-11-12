@@ -38,9 +38,11 @@ public class Room
         maxFloors=1;
         currentFloor=1;
     }
+    
     public int getMaxFloors() {
         return maxFloors;
     }
+    
     public int getCurrentFloor() {
         return currentFloor;
     }

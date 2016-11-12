@@ -2,7 +2,7 @@ import java.util.ArrayList;
 /**
  * Write a description of class Inventory here.
  * 
- * @author Brian McKiernan Nathan Paget
+ * @author Brian McKiernan 
  * @version 11/11/2016
  */
 public class Inventory
@@ -26,6 +26,27 @@ public class Inventory
     }
     
     /**
+     * Method contains just reuses ArrayList contains which returns boolean.
+     */
+    public boolean contains(Item itemContained)
+    {
+        return inventory.contains(itemContained);
+    }
+    
+    /**
+     * removeItem method removes an item from the inventory array.
+     */
+    public void removeItem(Item itemToRemove){
+        if(inventory.contains(itemToRemove)){
+            inventory.remove(itemToRemove);
+            items--;
+       }
+       else{
+           System.out.println("You can't remove an item from your inventory that you don't have");
+       }
+    }
+    
+    /**
      * Method that returns the index of an Item.
      */
     public int getItemIndex(Item itemToIndex){
@@ -38,7 +59,7 @@ public class Inventory
      */
     public Item getItem(int indexForItem){
         Item itemToReturn = inventory.get(indexForItem);
-        return itemToReturn;
+        return itemToReturn; 
     }
     
     /**
@@ -50,10 +71,25 @@ public class Inventory
     }
     
     /**
-     * removeItem method removes an item from the inventory array.
+     * Gets an item from the inventory array based on a string.
+     * IF THE ITEM IS NOT IN THE INVENTORY THEN THIS METHOD RETURNS NULL!!!!!! <--incase of null pointer excep.
      */
-    public void removeItem(Item itemToRemove){
-        inventory.remove(itemToRemove);
-        items--;
+    public Item getItemFromString(String itemName)
+    {
+        Item itemToFind = null;
+        for(int i = 0; i<inventory.size(); i++)
+        {
+            itemToFind = inventory.get(i);
+            if(itemName.equalsIgnoreCase(itemToFind.getName()))
+            {
+                inventory.remove(itemToFind);
+                int remainder = (inventory.size() - i);
+                i += remainder;
+            }
+            else{
+                itemToFind = null;
+            }
+        }
+        return itemToFind;
     }
 }
