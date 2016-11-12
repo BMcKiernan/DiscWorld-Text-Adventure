@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Player
 {
     ArrayList<String> inventory;
-    ArrayList<String> equipped;
+    ArrayList<String> equipment;
     
     /**
      * No-Arg Constructor for player which intializes arrays.
@@ -17,7 +17,7 @@ public class Player
     public Player()
     {
         inventory = new ArrayList<String>();
-        equipped = new ArrayList<String>();
+        equipment = new ArrayList<String>();
     }
     
     /**
@@ -55,6 +55,30 @@ public class Player
         }
         System.out.println();
     }
+    
+    /**
+     * equipItem method passes a string to the inventory array. After the inventory array verifies it has the
+     * item it then passes it to the equipment array 
+     */
+    public void equipItem(String equipItem)
+    {
+        if(inventory.contains(equipItem))
+        {
+            int index = inventory.indexOf(equipItem);
+            equipment.add(inventory.get(index));
+            System.out.printf("\n You just equipped %s \n",equipItem);
+            inventory.remove(equipItem);
+        }
+        else if (equipment.contains(equipItem))
+        {
+            System.out.printf("\n %s is already equpped\n",equipItem);
+        }
+        else
+        {
+           System.out.println("There is no such item to equip"); 
+        }
+    }
+    
     
     
 }
