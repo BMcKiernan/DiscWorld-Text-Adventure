@@ -20,6 +20,9 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
+    private Inventory contents;
+    private int maxFloors;
+    private int currentFloor;
 
     /**
      * Create a room described "description". Initially, it has
@@ -31,6 +34,15 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<>();
+        contents = new Inventory();
+        maxFloors=1;
+        currentFloor=1;
+    }
+    public int getMaxFloors() {
+        return maxFloors;
+    }
+    public int getCurrentFloor() {
+        return currentFloor;
     }
 
     /**
@@ -50,6 +62,12 @@ public class Room
     public String getShortDescription()
     {
         return description;
+    }
+    
+    public void addItem(String itemname, boolean equipable)
+    {
+        Item item = new Item(itemname,equipable);
+        contents.addItem(item);
     }
 
     /**
