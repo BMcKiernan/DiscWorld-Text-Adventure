@@ -7,13 +7,13 @@
  */
 public class Item
 {
-   boolean equipable ;
+   boolean equipable;
    String itemName;
    
    /**
     * Constructor that accepts arguments for Item.
     */
-   public Item(String itemName,boolean equipable){
+   public Item(String itemName, boolean equipable){
        this.itemName = itemName;
        this.equipable = equipable;
     }
@@ -27,14 +27,7 @@ public class Item
    }
     
     /**
-     * take method returns a boolean about whether or not an item is takeable.
-     */
-   public boolean take(){
-        return true;
-    }
-    
-    
-    /**
+
      * equip Method returns a boolean about whether or not an item is equipable.
      */
    public boolean equip(){
