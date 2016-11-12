@@ -8,15 +8,13 @@
 public class Item
 {
    boolean equipable ;
-   boolean takeable;
    String itemName;
    
    /**
     * Constructor that accepts arguments for Item.
     */
-   public Item(String itemName,boolean takeable, boolean equipable){
+   public Item(String itemName,boolean equipable){
        this.itemName = itemName;
-       this.takeable = takeable;
        this.equipable = equipable;
     }
     
@@ -32,14 +30,7 @@ public class Item
      * take method returns a boolean about whether or not an item is takeable.
      */
    public boolean take(){
-       if(takeable == true)
-       {
-           return true;
-       }
-       else
-       {
-           return false;
-       }
+        return true;
     }
     
     

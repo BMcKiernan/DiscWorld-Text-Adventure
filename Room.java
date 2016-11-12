@@ -51,6 +51,11 @@ public class Room
     {
         return description;
     }
+    
+    public void addItem(String itemname, boolean equipable)
+    {
+        Item item = new Item(itemname,equipable);
+    }
 
     /**
      * Return a description of the room in the form:
