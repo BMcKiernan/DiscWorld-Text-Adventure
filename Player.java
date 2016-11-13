@@ -21,6 +21,27 @@ public class Player
     }
     
     /**
+     * Adds an item to the players inventory.
+     */
+    public void addItem(Item item){
+        playerInventory.addItem(item);
+    }
+    
+    /**
+    * Removes an Item from the players inventory.
+    */
+    public void remove(Item item){
+        playerInventory.removeItem(item);
+    }
+    
+    /**
+     * Checks to see if the player's inventory contains the item.
+     */
+    public boolean contains(Item item){
+        return playerInventory.contains(item);
+    }
+    
+    /**
      * displayItems method prints out the items in the players inventory.
      */
     public void displayItems(){
@@ -52,7 +73,7 @@ public class Player
         {
             itemToEquip.equipItem(itemToEquip);
             String itemName = itemToEquip.getName();
-            Item itemForTransfer = playerInventory.getItemFromString(itemName);
+            Item itemForTransfer = playerInventory.stringFindsItem(itemName);
             playerInventory.removeItem(itemForTransfer);
             equipment.addItem(itemForTransfer);
         }  
