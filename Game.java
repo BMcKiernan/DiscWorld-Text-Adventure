@@ -24,7 +24,7 @@ public class Game
     private String lastDirection; 
     HashMap<String, String> reverseDirection = new HashMap<>();
     private Player rincewind;
-
+    private Inventory testInv;
     /**
      * Create the game and initialise its internal map.
      */
@@ -32,7 +32,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();       
-        
+        Inventory testInv= new Inventory();
         //reverse direction hashmap
         reverseDirection.put("north","south");
         reverseDirection.put("south","north");
@@ -48,37 +48,55 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office, courtyard, libraryEntrance, libraryS, librarySE,
-             libraryE, libraryNE, libraryN, libraryNW, libraryW, librarySW, libraryC, lowerLibraryS, 
-             lowerLibrarySE, lowerLibraryE, lowerLibraryNE, lowerLibraryN, lowerLibraryNW, lowerLibraryW, 
+        Room outside, theater, pub, lab, office, courtyard, libraryEntrance, 
              lowerLibrarySW, lowerLibraryC, field, towerBase, towerTop, mainEntrance, 
              bathroom, greatHall, kitchen, cellar;
         RoomWithFloors towerMain;
+        RoomWithDeathChance libraryS, librarySE, libraryE, libraryNE, libraryN, libraryNW,
+            libraryW, librarySW, libraryC, lowerLibraryS, lowerLibrarySE, lowerLibraryE, 
+            lowerLibraryNE, lowerLibraryN, lowerLibraryNW, lowerLibraryW;
         // create the rooms
 
         courtyard = new Room("in the main courtyard of the Unseen University");
         
         libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk");
-        libraryS = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
-        librarySE = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
-        libraryE = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
-        libraryNE = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
-        libraryN = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
-        libraryNW = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
-        libraryW = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
-        librarySW = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
-        libraryC = new Room("in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air");
+        libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        librarySE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        libraryE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        libraryNE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        libraryN = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        libraryNW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        libraryW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        librarySW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        libraryC = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
         
-        lowerLibraryS = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-        lowerLibrarySE = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-        lowerLibraryE = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-        lowerLibraryNE = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-        lowerLibraryN = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-        lowerLibraryNW = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-        lowerLibraryW = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-        lowerLibrarySW = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-        lowerLibraryC = new Room("in the basement of the library.  \nYou see  towering bookshelves above you, and can hear the hum of magic in the air");
-
+        lowerLibraryS = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        lowerLibrarySE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        lowerLibraryE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        lowerLibraryNE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        lowerLibraryN = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        lowerLibraryNW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        lowerLibraryW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        lowerLibrarySW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
+        lowerLibraryC = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+                            "the hum of magic in the air", 10, "chainmail");
         field = new Room("in the main courtyard of the Unseen University");
         
         towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you");
@@ -343,6 +361,9 @@ public class Game
                 System.out.println("You walk "+direction);
                 currentRoom = nextRoom;
                 System.out.println(currentRoom.getLongDescription());
+                if(currentRoom instanceof RoomWithDeathChance) {
+                    System.out.println(((RoomWithDeathChance)currentRoom).isDead());
+                }
             }
         }
     }
