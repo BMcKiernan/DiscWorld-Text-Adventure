@@ -379,7 +379,7 @@ public class Game
         String itemName;
         Item item;
         if(!command.hasSecondWord()){
-            System.out.print("Ok yeah...");
+            System.out.println("Ok yeah...\n");
         }
         else if(currentRoom.contentsSize()!=0)
         {
@@ -389,19 +389,19 @@ public class Game
                 currentRoom.removeItem(item);
                 player.addItem(item);
                     if(player.contains(item)==true){
-                    System.out.println("The item has been added to your inventory");
+                    System.out.println("The item has been added to your inventory.\n");
                 }
                 else{
-                    System.out.println("Something is wrong");
+                    System.out.println("Something is wrong.\n");
                 }
             }
             else
             {
-                System.out.println("This is not an item you can add");
+                System.out.println("This is not an item you can add.\n");
             }
         }
         else{
-            System.out.println("take what...?");
+            System.out.println("take what...?\n");
         }
     }
     
