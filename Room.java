@@ -66,12 +66,54 @@ public class Room
         return description;
     }
     
-    public void addItem(String itemname, boolean equipable)
+    /**
+     * returns the size of the contents array.
+     */
+    public int contentsSize(){
+        int size = contents.size();
+        return size;
+    }
+    
+    /**
+     * Returns a boolean if the contents array contains the item.
+     */
+    public boolean contains(Item item){
+        return contents.contains(item);
+    }
+    
+    /**
+     * This method adds items to a rooms contents the first time they are created.
+     */
+    public void addItemInitial(String itemname, boolean equipable)
     {
         Item item = new Item(itemname,equipable);
         contents.addItem(item);
     }
-
+    
+    /**
+     * This method adds already created Items to the rooms contents array.
+     * 
+     */
+    public void addItem(Item item){
+        contents.addItem(item);
+    }
+    
+    /**
+     *Calls the method from inventory to remove an Item.
+     */
+    public void removeItem(Item itemName){
+           contents.removeItem(itemName);
+    }
+    
+    /**
+     * This method returns an item found from its string name. The item is not automatically
+     * removed the the contents array.
+     */
+    public Item getItem(String itemName){
+        Item item = contents.stringFindsItem(itemName);
+        return item;
+    }
+    
     /**
      * Return a description of the room in the form:
      *     You are in the kitchen.
