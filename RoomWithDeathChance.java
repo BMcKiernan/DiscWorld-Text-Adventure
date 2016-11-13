@@ -25,11 +25,19 @@ public class RoomWithDeathChance extends Room
     }
     public boolean isDead(Inventory playerInv)
     {
-        if 
+        
+        //if(playerInv.getItemFromString(safeItem)==null){
+       //     return false;
+        //}
+       // else {
+            return checkDeathEvent();
+            
+       // }
     }
     private boolean checkDeathEvent()
     {
         int  n = rand.nextInt(100) + 1;
+        System.out.println(""+n+" > "+percentChanceOfDeath+"?");
         return n<percentChanceOfDeath;
     }
 
