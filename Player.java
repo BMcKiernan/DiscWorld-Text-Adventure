@@ -42,23 +42,24 @@ public class Player
         System.out.println();
     }
     
-    //     /**
-    //      * equipItem method passes a string to the inventory array. After the inventory array verifies it has the
-    //      * item it then passes it to the equipment array 
-    //      */
-    //     public void equipItem(Item itemToEquip)
-    //     {
-    //         if(playerInventory.contains(itemToEquip))
-    //         {
-    //             
-    //           
-    //         else
-    //         {
-    //            System.out.println("There is no such item to equip"); 
-    //         }
-    //        
-    //     
-    //     
-    //     
- }
+    /**
+     * equipItem method passes a string to the inventory array. After the inventory array verifies it has the
+     * item it then passes it to the equipment array 
+     */
+    public void equipItem(Item itemToEquip)
+    {
+        if(playerInventory.contains(itemToEquip))
+        {
+            itemToEquip.equipItem(itemToEquip);
+            String itemName = itemToEquip.getName();
+            Item itemForTransfer = playerInventory.getItemFromString(itemName);
+            playerInventory.removeItem(itemForTransfer);
+            equipment.addItem(itemForTransfer);
+        }  
+        else
+        {
+           System.out.println("There is no such item to equip"); 
+        }
+    }
+}
     
