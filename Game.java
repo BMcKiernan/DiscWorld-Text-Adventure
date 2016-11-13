@@ -33,6 +33,8 @@ public class Game
         createRooms();
         parser = new Parser();       
         Inventory testInv= new Inventory();
+        Item tstItem = new Item("key",false);
+        testInv.addItem(tstItem);    
         //reverse direction hashmap
         reverseDirection.put("north","south");
         reverseDirection.put("south","north");
@@ -362,7 +364,7 @@ public class Game
                 currentRoom = nextRoom;
                 System.out.println(currentRoom.getLongDescription());
                 if(currentRoom instanceof RoomWithDeathChance) {
-                    System.out.println(((RoomWithDeathChance)currentRoom).isDead());
+                    System.out.println(((RoomWithDeathChance)currentRoom).isDead(testInv));
                 }
             }
         }
