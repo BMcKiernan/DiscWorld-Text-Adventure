@@ -71,7 +71,7 @@ public class Game
         LockedRoom octavoRoom;
         courtyard = new Room("in the main courtyard of the Unseen University","courtyard");
         
-        int deathChance=1;
+        int deathChance=15;
         
         libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk","libraryEntrance");
         libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
