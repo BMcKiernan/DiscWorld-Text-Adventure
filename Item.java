@@ -42,13 +42,8 @@ public class Item
    /**
     * This method checks to see if an Item is equipped.
     */
-   public boolean isItemEquipped(Item itemToCheck){
-       if(isEquipped==true){
-           return true;
-        }
-        else{
-           return false;
-        }
+   public boolean isItemEquipped(){
+       return isEquipped;
    }
    
    /**
@@ -65,8 +60,8 @@ public class Item
            System.out.println("You cannot equip item: "+itemToEquip.getName());
     }
     
-   public void unEquip(Item itemToUnequip){
-       if(isItemEquipped(itemToUnequip) == true){
+   public void unequip(){
+       if(isItemEquipped() ){
            isEquipped = false;
        }
     }

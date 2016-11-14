@@ -42,7 +42,7 @@ public class RoomWithDeathChance extends Room
             Item item =playerEquipment.stringFindsItem(safeItem);
 
             
-            if(item.isItemEquipped(item)) {
+            if(item.isItemEquipped()) {
                 return false;            
             }
             else{

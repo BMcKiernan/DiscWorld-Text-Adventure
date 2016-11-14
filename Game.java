@@ -74,38 +74,38 @@ public class Game
         int deathChance=1;
         
         libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk","libraryEntrance");
-        libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","libraryS", deathChance, "chainmail");
-        librarySE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        librarySE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","librarySE", deathChance, "chainmail");
-        libraryE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        libraryE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","libraryE", deathChance, "chainmail");
-        libraryNE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        libraryNE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","libraryNE", deathChance, "chainmail");
-        libraryN = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        libraryN = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","libraryN", deathChance, "chainmail");
-        libraryNW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        libraryNW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","libraryNW", deathChance, "chainmail");
-        libraryW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        libraryW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","libraryW", deathChance, "chainmail");
-        librarySW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        librarySW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","librarySW", deathChance, "chainmail");
-        libraryC = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
+        libraryC = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","libraryC", deathChance, "chainmail");
         
-        lowerLibraryS = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+        lowerLibraryS = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","lowerLibraryS", deathChance, "chainmail");
-        lowerLibrarySE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+        lowerLibrarySE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","lowerLibrarySE", deathChance, "chainmail");
-        lowerLibraryE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+        lowerLibraryE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","lowerLibraryE", deathChance, "chainmail");
-        lowerLibraryNE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+        lowerLibraryNE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","lowerLibraryNE", deathChance, "chainmail");
-        lowerLibraryN = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+        lowerLibraryN = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","lowerLibraryN", deathChance, "chainmail");
-        lowerLibraryNW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+        lowerLibraryNW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","lowerLibraryNW", deathChance, "chainmail");
-        lowerLibraryW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
+        lowerLibraryW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
                             "the hum of magic in the air","lowerLibraryW", deathChance, "chainmail");
         octavoRoom = new LockedRoom("in the room with the great Octavo.  \nIn the center of the room, you see the book bound in"+ 
                             "chans, and can feel the hum of magic in the air.\n You step up to the book, and read the words of the Creator"+
@@ -337,6 +337,10 @@ public class Game
                 
             case EQUIP:
                 equip(command);
+                break;
+                
+            case UNEQUIP:
+                unequip(command);
                 break;
             
                 //             case DROP:
@@ -577,11 +581,21 @@ public class Game
     /**
      * This method calls the uneEquip method from player which uses the isEquipped method fromthe Item class.
      */
-    private void unEquip(Command command){
-        Rincewind.unEquip(command.getSecondWord());
+    private void unequip(Command command){
+        if(!command.hasSecondWord()) {
+            System.out.println("Unequip what?");
+        }
+        else {
+            Rincewind.unequip(command.getSecondWord());
+        }
     }
     
     private void equip(Command command){
-        Rincewind.equipItemFromString(command.getSecondWord());
+        if(!command.hasSecondWord()) {
+            System.out.println("Equip what?");
+        }
+        else {
+            Rincewind.equipItemFromString(command.getSecondWord());
+        }
     }
 }
