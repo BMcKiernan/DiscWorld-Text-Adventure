@@ -71,7 +71,7 @@ public class Game
         LockedRoom octavoRoom;
         courtyard = new Room("in the main courtyard of the Unseen University","courtyard");
         
-        int deathChance=1;
+        int deathChance=15;
         
         libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk","libraryEntrance");
         libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
@@ -343,8 +343,9 @@ public class Game
                 unequip(command);
                 break;
             
-                //             case DROP:
-                //                 drop(command);
+            case DROP:
+                drop(command);
+                break;
                 
         }
         return wantToQuit;
@@ -453,6 +454,26 @@ public class Game
     private void look()
     {
         System.out.println(currentRoom.getLongDescription());
+    }
+    
+    private void drop(Command command) 
+    {
+        
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't who to give an item
+            System.out.println("Give who what?");
+            return;
+        }
+        else{
+            Item item1= Rincewind.playerInventory.stringFindsItem(command.getSecondWord());
+            if(item1!=null){
+                //Do the trade
+                Rincewind.playerInventory.removeItem(item1);
+                currentRoom.contents.addItem(item1);
+                System.out.println("You just dropped: " + item1.getName()+"\n");
+                
+            }
+        }
     }
     
     private void give(Command command)
