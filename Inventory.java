@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Inventory
 {
     ArrayList<Item> inventory;
-    int items=0;
     
     /**
      * No-Arg Constructor that intializes a new ArrayList for an Inventory.
@@ -22,7 +21,6 @@ public class Inventory
      */
     public void addItem(Item itemToAdd){
         inventory.add(itemToAdd);
-        items++;
     }
     
     /**
@@ -39,7 +37,6 @@ public class Inventory
     public void removeItem(Item itemToRemove){
         if(inventory.contains(itemToRemove)){
             inventory.remove(itemToRemove);
-            items--;
        }
        else{
            System.out.println("You can't remove an item from your inventory that you don't have");
@@ -67,14 +64,15 @@ public class Inventory
      */
     public int size()
     {
-        return items;
+        int size = inventory.size();
+        return size;
     }
     
     /**
      * Gets an item from the inventory array based on a string.
      * IF THE ITEM IS NOT IN THE INVENTORY THEN THIS METHOD RETURNS NULL!!!!!! <--incase of null pointer excep.
      */
-    public Item getItemFromString(String itemName)
+    public Item stringFindsItem(String itemName)
     {
         Item itemToFind = null;
         for(int i = 0; i<inventory.size(); i++)
@@ -82,7 +80,6 @@ public class Inventory
             itemToFind = inventory.get(i);
             if(itemName.equalsIgnoreCase(itemToFind.getName()))
             {
-                inventory.remove(itemToFind);
                 int remainder = (inventory.size() - i);
                 i += remainder;
             }

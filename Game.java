@@ -23,18 +23,18 @@ public class Game
     private RoomWithFloors towerRoom;
     private String lastDirection; 
     HashMap<String, String> reverseDirection = new HashMap<>();
-    private Player rincewind;
-    private Inventory testInv;
+
+    Player player;
+
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
         createRooms();
-        parser = new Parser();       
-        Inventory testInv= new Inventory();
-        Item tstItem = new Item("key",false);
-        testInv.addItem(tstItem);    
+        parser = new Parser(); 
+        player = new Player();
+        
         //reverse direction hashmap
         reverseDirection.put("north","south");
         reverseDirection.put("south","north");
@@ -134,7 +134,7 @@ public class Game
         
         
         bathroom.setExit("north",mainEntrance);
-        bathroom.addItem("Key",false);
+        bathroom.addItemInitial("Key",false);
         
         
         kitchen.setExit("down",cellar);
@@ -293,6 +293,13 @@ public class Game
                 give(command);
                 break;
                 
+            case TAKE:
+                take(command);
+                break;
+            
+                //             case DROP:
+                //                 drop(command);
+                
         }
         return wantToQuit;
     }
@@ -329,27 +336,26 @@ public class Game
         //if(command.getSecondWord();)
         lastDirection = direction;
         if(currentRoom instanceof RoomWithFloors) {
+            if(((RoomWithFloors)currentRoom).moveFloors(direction)){
+                System.out.println("You walk "+direction);
+                System.out.println(currentRoom.getLongDescription());
+            }
             
-                if(((RoomWithFloors)currentRoom).moveFloors(direction)){
-                    System.out.println("You walk "+direction);
+            else{      
+                Room nextRoom = currentRoom.getExit(direction);
+                Room prevRoom = currentRoom;
+                if (nextRoom == null) {
+                    System.out.println("There is no door!");
+                }
+                else {
+                    System.out.println("You walk  "+direction);
+                    currentRoom = nextRoom;
                     System.out.println(currentRoom.getLongDescription());
                 }
                 
-                else{      
-                    Room nextRoom = currentRoom.getExit(direction);
-                    Room prevRoom = currentRoom;
-                    if (nextRoom == null) {
-                        System.out.println("There is no door!");
-                    }
-                    else {
-                        System.out.println("You walk  "+direction);
-                        currentRoom = nextRoom;
-                        System.out.println(currentRoom.getLongDescription());
-                    }
-                    
-                }
-                
-        
+
+            
+            }
         }
         else {
             // Try to leave current room.
@@ -364,7 +370,7 @@ public class Game
                 currentRoom = nextRoom;
                 System.out.println(currentRoom.getLongDescription());
                 if(currentRoom instanceof RoomWithDeathChance) {
-                    System.out.println(((RoomWithDeathChance)currentRoom).isDead(testInv));
+                    //System.out.println(((RoomWithDeathChance)currentRoom).isDead(testInv));
                 }
             }
         }
@@ -394,6 +400,40 @@ public class Game
     }
 
     /**
+     * The take command makes sure the user has entered a second word. If there is a second word and the room has items in it then the item is searched for throughout
+     * the rooms contents, the item is then removed from the contents of the room and added to the playersInventory. THIS METHOD IS NOT COMPLETE***IF THE ITEM 
+     */
+    public void take(Command command){
+        String itemName;
+        Item item;
+        if(!command.hasSecondWord()){
+            System.out.println("Ok yeah...\n");
+        }
+        else if(currentRoom.contentsSize()!=0)
+        {
+            itemName = command.getSecondWord();
+            item = currentRoom.getItem(itemName);
+            if(currentRoom.contains(item)==true){
+                currentRoom.removeItem(item);
+                player.addItem(item);
+                    if(player.contains(item)==true){
+                    System.out.println("The item has been added to your inventory.\n");
+                }
+                else{
+                    System.out.println("Something is wrong.\n");
+                }
+            }
+            else
+            {
+                System.out.println("This is not an item you can add.\n");
+            }
+        }
+        else{
+            System.out.println("take what...?\n");
+        }
+    }
+    
+    /**
      * Method goBack sends player back to the last room.
      */
     private void goBack()    
@@ -410,10 +450,7 @@ public class Game
             lastDirection = directionBack;
             System.out.println(currentRoom.getLongDescription());
         }
-        
     }
-
-    
     
     /** 
      * "Quit" was entered. Check the rest of the command to see
