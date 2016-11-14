@@ -21,7 +21,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;        // stores exits of this room.
-    private Inventory contents;
+    public Inventory contents;
     private String roomName;
     /**
      * Create a room described "description". Initially, it has
