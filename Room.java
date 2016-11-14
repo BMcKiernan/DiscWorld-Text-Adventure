@@ -55,9 +55,11 @@ public class Room
     {
         return description;
     }
+
     /**
      * @return String name of room
      */
+
     public String getRoomName()
     {
         return roomName;

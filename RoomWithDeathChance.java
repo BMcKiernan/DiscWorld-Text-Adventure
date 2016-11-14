@@ -26,6 +26,7 @@ public class RoomWithDeathChance extends Room
         this.safeItem=safeItem;
         rand = new Random();
     }
+
     /**
      * method to check if the player will die once they enter the room
      * @return boolean of dead/alive
@@ -39,25 +40,26 @@ public class RoomWithDeathChance extends Room
         }
         else {
             Item item =playerEquipment.stringFindsItem(safeItem);
+
             
             if(item.isItemEquipped(item)) {
-            return false;            
+                return false;            
             }
             else{
                 return checkDeathEvent();
             }
         }
     }
+
     /**
      * method to check whether the death event actually occurs
      * @return true/false of event occurring
      */
+
     private boolean checkDeathEvent()
     {
         int  n = rand.nextInt(100) + 1;
         System.out.println(""+n+" > "+percentChanceOfDeath+"?");
         return n<percentChanceOfDeath;
     }
-
- 
 }

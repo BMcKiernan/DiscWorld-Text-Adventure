@@ -12,7 +12,7 @@ public enum CommandWord
     // corresponding user interface string.
 
     GO("go"), QUIT("quit"), HELP("help"), LOOK("look"), UNKNOWN("?"), 
-    BACK("back"), GIVE("give"), TAKE("take"), DROP("drop"), EQUIP("equip");
+    BACK("back"), GIVE("give"), TAKE("take"), DROP("drop"), EQUIP("equip"), UNEQUIP("unEquip");
 
     
     // The command string.

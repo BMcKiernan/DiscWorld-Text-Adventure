@@ -253,7 +253,7 @@ public class Game
         // execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) {
+        while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
             if(isDead){
@@ -291,7 +291,6 @@ public class Game
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
-
         switch (commandWord) {
             case UNKNOWN:
                 System.out.println("I don't know what you mean...");
@@ -384,9 +383,6 @@ public class Game
                     currentRoom = nextRoom;
                     System.out.println(currentRoom.getLongDescription());
                 }
-                
-
-            
             }
         }
         else {
@@ -417,7 +413,6 @@ public class Game
                     isDead=((RoomWithDeathChance)currentRoom).isDead(Rincewind.equipment);
                 }
             }
-        
         }
     }
     
@@ -460,7 +455,6 @@ public class Game
                    
                 }
             }
-            
         }
     }
 
@@ -468,7 +462,7 @@ public class Game
      * The take command makes sure the user has entered a second word. If there is a second word and the room has items in it then the item is searched for throughout
      * the rooms contents, the item is then removed from the contents of the room and added to the playersInventory. THIS METHOD IS NOT COMPLETE***IF THE ITEM 
      */
-    public void take(Command command){
+    private void take(Command command){
         String itemName;
         Item item;
         if(!command.hasSecondWord()){
@@ -532,8 +526,15 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+    
+    /**
+     * This method calls the uneEquip method from player which uses the isEquipped method fromthe Item class.
+     */
+    private void unEquip(Command command){
+        Rincewind.unEquip(command.getSecondWord());
+    }
+    
     private void equip(Command command){
         Rincewind.equipItemFromString(command.getSecondWord());
-        
     }
 }

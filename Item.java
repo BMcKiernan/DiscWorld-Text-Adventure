@@ -64,4 +64,10 @@ public class Item
        else
            System.out.println("You cannot equip item: "+itemToEquip.getName());
     }
+    
+   public void unEquip(Item itemToUnequip){
+       if(isItemEquipped(itemToUnequip) == true){
+           isEquipped = false;
+       }
+    }
 }
