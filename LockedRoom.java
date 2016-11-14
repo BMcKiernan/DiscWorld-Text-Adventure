@@ -2,8 +2,10 @@
 /**
  * Write a description of class LockedRoom here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * 
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/14/26
  */
 public class LockedRoom extends Room
 {

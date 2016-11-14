@@ -5,8 +5,9 @@ import java.util.Random;
 /**
  * Write a description of class RoomWithFloors here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/14/26
  */
 public class RoomWithDeathChance extends Room
 {
