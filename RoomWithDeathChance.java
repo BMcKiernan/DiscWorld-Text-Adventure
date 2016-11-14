@@ -59,7 +59,7 @@ public class RoomWithDeathChance extends Room
     private boolean checkDeathEvent()
     {
         int  n = rand.nextInt(100) + 1;
-        System.out.println(""+n+" > "+percentChanceOfDeath+"?");
+        //System.out.println(""+n+" > "+percentChanceOfDeath+"?");
         return n<percentChanceOfDeath;
     }
 }

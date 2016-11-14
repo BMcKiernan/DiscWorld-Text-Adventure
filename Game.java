@@ -26,6 +26,7 @@ public class Game
     HashMap<String, String> reverseDirection = new HashMap<>();
     private boolean isDead;
     private boolean gameWon;
+    private int interactionCounter;
     Player Rincewind;
     Player Librarian;
 
@@ -42,6 +43,7 @@ public class Game
         Librarian.playerInventory.addItem(item);
         isDead=false;
         gameWon=false;
+        interactionCounter=0;
         //reverse direction hashmap
         reverseDirection.put("north","south");
         reverseDirection.put("south","north");
@@ -63,7 +65,8 @@ public class Game
         RoomWithFloors towerMain;
         RoomWithDeathChance libraryS, librarySE, libraryE, libraryNE, libraryN, libraryNW,
             libraryW, librarySW, libraryC, lowerLibraryS, lowerLibrarySE, lowerLibraryE, 
-            lowerLibraryNE, lowerLibraryN, lowerLibraryNW, lowerLibraryW, lowerLibraryC;
+            lowerLibraryNE, lowerLibraryN, lowerLibraryNW, lowerLibraryW, lowerLibraryC,
+            fourEcks;
         // create the rooms
         LockedRoom octavoRoom;
         courtyard = new Room("in the main courtyard of the Unseen University","courtyard");
@@ -109,6 +112,8 @@ public class Game
                             " of the Discworld: \n Ashonai. Ebiris. Urshoring. Kvanti. Pythan. N'gurad. Feringomalee. -.", "octavoRoom","Key");
         lowerLibraryC = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
                             "the hum of magic in the air","lowerLibraryC", deathChance, "chainmail");
+        fourEcks = new RoomWithDeathChance("now in a desert land.  You see a sign in the distance reading:\n 'Welcome to XXXX'.\n\n"+
+                                           "You hear a noise above you. A drop-bear lands on your head.","fourEcks", 100, "");
         field = new Room("in the main courtyard of the Unseen University","field");
         
         towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you","towerBase");
@@ -191,6 +196,7 @@ public class Game
         
         libraryNE.setExit("south",libraryE);
         libraryNE.setExit("west",libraryN);
+        libraryNE.setExit("east",fourEcks);
         
         libraryN.setExit("south",libraryC);
         libraryN.setExit("east",libraryNE);
@@ -264,6 +270,11 @@ public class Game
                 finished=true;
                 System.out.println("You have just won the game.");
             }
+            if(interactionCounter>5){
+                finished=true;
+                System.out.println("The Librarian gets frustrated with your continuing interactions with him.\n "+
+                                   "He jumps at your face and rips it off. \n\nYou have just died.");
+            }
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -278,7 +289,7 @@ public class Game
         System.out.println("Discworld is a fascinating and magical, yet dangerout place.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getShortDescription());
     }
 
     /**
@@ -364,52 +375,68 @@ public class Game
         }
         
         String direction = command.getSecondWord();
-        //if(command.getSecondWord();)
         lastDirection = direction;
+        // If our current room is a RoomWithFloor
         if(currentRoom instanceof RoomWithFloors) {
+            //Attempt to move floors in the given direction.
             if(((RoomWithFloors)currentRoom).moveFloors(direction)){
+                //if true was returned, we have succesfully moved
                 System.out.println("You walk "+direction);
-                System.out.println(currentRoom.getLongDescription());
+                System.out.println(currentRoom.getShortDescription());
             }
             
             else{      
+                //If false was returned, we could have an invalid direction or be at the top or bottom
                 Room nextRoom = currentRoom.getExit(direction);
                 Room prevRoom = currentRoom;
+                //Now we try to move to the next room in a direction
                 if (nextRoom == null) {
+                    //We had an invalid directional command
                     System.out.println("There is no door!");
                 }
                 else {
+                    //We were at the top or bottom and successfully exited the multi-floor room
                     System.out.println("You walk  "+direction);
                     currentRoom = nextRoom;
-                    System.out.println(currentRoom.getLongDescription());
+                    System.out.println(currentRoom.getShortDescription());
                 }
             }
         }
+        //Next room is a single-floor room
         else {
             // Try to leave current room.
             Room nextRoom = currentRoom.getExit(direction);
             Room prevRoom = currentRoom;
-    
+            //Now we test the next room for a couple conditions
             if (nextRoom == null) {
+                //There was no next room in that direction
                 System.out.println("There is no door!");
             }
+            
             else if(nextRoom instanceof LockedRoom) {
-                    if(Rincewind.playerInventory.stringFindsItem(((LockedRoom)nextRoom).getKeyName())==null){
-                        System.out.println("The way is shut.  You must find a key to enter");
-                    } 
-                    
-                    else {
-                        System.out.println("You walk "+direction);
-                        currentRoom = nextRoom;
-                        System.out.println(currentRoom.getLongDescription());
-                        gameWon=true;
-                    }
+                //The next room is actually a locked room, so we check to see if we can unlock it
+                //We look in the player's inventory for the item known by the room to be require to unlock the door
+                if(Rincewind.playerInventory.stringFindsItem(((LockedRoom)nextRoom).getKeyName())==null){
+                    //We could not find the item in the player's inventory
+                    System.out.println("The way is shut.  You must find a key to enter");
+                }                     
+                else {
+                    //The required item was found, the player moves to that room
+                    System.out.println("You walk "+direction);
+                    currentRoom = nextRoom;
+                    System.out.println(currentRoom.getShortDescription());
+                    //Since the only locked room is the end, we can just set the win condition here
+                    gameWon=true;
+                }
                 }
             else {
+                //The next room is valid and unlocked, so we move to that room
                 System.out.println("You walk "+direction);
                 currentRoom = nextRoom;
-                System.out.println(currentRoom.getLongDescription());
+                System.out.println(currentRoom.getShortDescription());
+                //Our next room could kill the player, so we see if it's a room that could kill them
                 if(currentRoom instanceof RoomWithDeathChance) {
+                    //We pass the player's inventory to the room to see if they have the necessary item equipped
                     isDead=((RoomWithDeathChance)currentRoom).isDead(Rincewind.equipment);
                 }
             }
@@ -427,19 +454,27 @@ public class Game
     private void give(Command command)
     {
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
+            // if there is no second word, we don't who to give an item
             System.out.println("Give who what?");
             return;
         }
         else if(!command.hasThirdWord()) {
+            // if there is no third word, we don't know what to give
             System.out.println("Give " + command.getSecondWord() + "to whom?");
         }
         else {
+            // Currently a little hacky, but checks that the current room is the library entrance and that you 
+            // are trying to give an item to the Librarian
             if(command.getSecondWord().equals("Librarian")&&currentRoom.getRoomName().equals("libraryEntrance")) {
+                interactionCounter++;
+                // Checks that the player is trying to give the Librarian a banana
                 if(command.getThirdWord().equals("Banana") ){
+                    // Find the banana in the player's inventory, and the chainmail in the Librarian's
                     Item item1= Rincewind.playerInventory.stringFindsItem(command.getThirdWord());
                     Item item2=Librarian.playerInventory.stringFindsItem("chainmail");
+                    //Test to see if the player has a banana, or if they already got the chainmail from the Librarian
                     if(item1!=null&&item2!=null){
+                        //Do the trade
                         Rincewind.playerInventory.removeItem(item1);
                         Librarian.playerInventory.removeItem(item2);
                         Librarian.playerInventory.addItem(item1);
@@ -447,7 +482,19 @@ public class Game
                         
                     }
                     else {
-                        System.out.println("You do not have a "+command.getThirdWord());
+                        if(item1==null&&item2==null){
+                            //Neither have anything to trade
+                            System.out.println("The Librarian looks at you confusedly, and OOKs at you");
+                            
+                        }
+                        else if(item1==null){
+                            //The player has no item to give
+                            System.out.println("You do not have a "+command.getThirdWord());
+                        }
+                        else if(item2==null){
+                            //The Librarian has no item to give
+                            System.out.println("The Librarian has already given you his chainmail");
+                        }
                     }
                }
                else {
@@ -507,7 +554,7 @@ public class Game
         else {
             currentRoom = lastRoom;
             lastDirection = directionBack;
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(currentRoom.getShortDescription());
         }
     }
     
