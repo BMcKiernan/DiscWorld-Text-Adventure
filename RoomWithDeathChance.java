@@ -23,14 +23,14 @@ public class RoomWithDeathChance extends Room
         this.safeItem=safeItem;
         rand = new Random();
     }
-    public boolean isDead(Inventory playerInv)
+    public boolean isDead(Inventory playerEquipment)
     {
         
-        if(playerInv.stringFindsItem(safeItem)==null){
+        if(playerEquipment.stringFindsItem(safeItem)==null){
             return checkDeathEvent();
         }
         else {
-            Item item =playerInv.stringFindsItem(safeItem);
+            Item item =playerEquipment.stringFindsItem(safeItem);
             
             if(item.isItemEquipped(item)) {
             return false;            

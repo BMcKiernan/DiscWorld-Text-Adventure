@@ -170,7 +170,7 @@ public class Game
         towerTop.addItemInitial("Banana",false);
         towerTop.addItemInitial("Apple",false);
         towerTop.addItemInitial("Pen",true);
-        towerTop.addItemInitial("Manuscript",true);
+        towerTop.addItemInitial("Manuscript",false);
         
         
         libraryEntrance.setExit("south",courtyard);
