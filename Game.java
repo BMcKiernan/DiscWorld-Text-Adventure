@@ -461,7 +461,7 @@ public class Game
      * The take command makes sure the user has entered a second word. If there is a second word and the room has items in it then the item is searched for throughout
      * the rooms contents, the item is then removed from the contents of the room and added to the playersInventory. THIS METHOD IS NOT COMPLETE***IF THE ITEM 
      */
-    public void take(Command command){
+    private void take(Command command){
         String itemName;
         Item item;
         if(!command.hasSecondWord()){
@@ -524,6 +524,13 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+    
+    /**
+     * This method calls the uneEquip method from player which uses the isEquipped method fromthe Item class.
+     */
+    private void unEquip(Command command){
+        Rincewind.unEquip(command.getSecondWord());
     }
     
     private void equip(Command command){
