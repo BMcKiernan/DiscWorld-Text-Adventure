@@ -82,5 +82,21 @@ public class Player
            System.out.println("There is no such item to equip"); 
         }
     }
+        public void equipItemFromString(String itemToEquipString)
+    {
+        Item itemToEquip=playerInventory.stringFindsItem(itemToEquipString);
+        if(itemToEquip!=null)
+        {
+            itemToEquip.equipItem(itemToEquip);
+            String itemName = itemToEquip.getName();
+            Item itemForTransfer = playerInventory.stringFindsItem(itemName);
+            playerInventory.removeItem(itemForTransfer);
+            equipment.addItem(itemForTransfer);
+        }  
+        else
+        {
+           System.out.println("There is no such item to equip"); 
+        }
+    }
 }
     

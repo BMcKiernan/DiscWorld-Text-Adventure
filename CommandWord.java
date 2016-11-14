@@ -10,7 +10,8 @@ public enum CommandWord
     // A value for each command word along with its
     // corresponding user interface string.
 
-    GO("go"), QUIT("quit"), HELP("help"), LOOK("look"), UNKNOWN("?"), BACK("back"), GIVE("give"), TAKE("take"), DROP("drop");
+    GO("go"), QUIT("quit"), HELP("help"), LOOK("look"), UNKNOWN("?"), 
+    BACK("back"), GIVE("give"), TAKE("take"), DROP("drop"), EQUIP("equip");
 
     
     // The command string.
