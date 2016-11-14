@@ -3,7 +3,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 /**
- * Write a description of class RoomWithFloors here.
+ * This is a special case of the Room class which has a % chance of
+ * killing the player unless they have a specific item equipped.
+ * the % chance of death is in the range 0-100
  * 
  * @author Brian McKiernan
  * @Nathan Paget
@@ -24,6 +26,11 @@ public class RoomWithDeathChance extends Room
         this.safeItem=safeItem;
         rand = new Random();
     }
+    /**
+     * method to check if the player will die once they enter the room
+     * @return boolean of dead/alive
+     * 
+     */
     public boolean isDead(Inventory playerEquipment)
     {
         
@@ -41,6 +48,10 @@ public class RoomWithDeathChance extends Room
             }
         }
     }
+    /**
+     * method to check whether the death event actually occurs
+     * @return true/false of event occurring
+     */
     private boolean checkDeathEvent()
     {
         int  n = rand.nextInt(100) + 1;

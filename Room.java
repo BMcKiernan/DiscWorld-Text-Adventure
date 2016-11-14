@@ -55,6 +55,9 @@ public class Room
     {
         return description;
     }
+    /**
+     * @return String name of room
+     */
     public String getRoomName()
     {
         return roomName;
@@ -119,6 +122,9 @@ public class Room
         return "You are " + description + ".\n You can see: " +getContents()+ "\n"+ getExitString() + "\n";
     }
     
+    /**
+     * @return The contents of the room as comma delimited String
+     */
     public String getContents()
     {
         String contentString ="";
