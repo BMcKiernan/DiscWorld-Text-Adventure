@@ -323,6 +323,10 @@ public class Game
             case TAKE:
                 take(command);
                 break;
+                
+            case EQUIP:
+                equip(command);
+                break;
             
                 //             case DROP:
                 //                 drop(command);
@@ -526,5 +530,9 @@ public class Game
         else {
             return true;  // signal that we want to quit
         }
+    }
+    private void equip(Command command){
+        Rincewind.equipItemFromString(command.getSecondWord());
+        
     }
 }
