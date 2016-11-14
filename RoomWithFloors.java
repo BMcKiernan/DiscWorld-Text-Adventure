@@ -14,9 +14,9 @@ public class RoomWithFloors extends Room
     /**
      * Constructor for objects of class RoomWithFloors
      */
-    public RoomWithFloors(String description, int maxFloors)
+    public RoomWithFloors(String description, String roomName, int maxFloors)
     {
-        super(description);
+        super(description,roomName);
         this.maxFloors=maxFloors;
         currentFloor=1;
     }
