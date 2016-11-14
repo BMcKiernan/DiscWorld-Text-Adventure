@@ -36,7 +36,7 @@ public class RoomWithDeathChance extends Room
             return false;            
             }
             else{
-                return false;
+                return checkDeathEvent();
             }
         }
     }
