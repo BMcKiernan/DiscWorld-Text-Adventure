@@ -2,8 +2,9 @@ import java.util.ArrayList;
 /**
  * Write a description of class Inventory here.
  * 
- * @author Brian McKiernan 
- * @version 11/11/2016
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/14/26
  */
 public class Inventory
 {

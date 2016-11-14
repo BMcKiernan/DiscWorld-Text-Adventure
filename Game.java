@@ -12,8 +12,9 @@ import java.util.HashMap;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/10/26
  */
 
 public class Game 
@@ -71,53 +72,53 @@ public class Game
         
         libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk","libraryEntrance");
         libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","libraryS", deathChance, "chainmail");
         librarySE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","librarySE", deathChance, "chainmail");
         libraryE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","libraryE", deathChance, "chainmail");
         libraryNE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","libraryNE", deathChance, "chainmail");
         libraryN = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","libraryN", deathChance, "chainmail");
         libraryNW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","libraryNW", deathChance, "chainmail");
         libraryW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","libraryW", deathChance, "chainmail");
         librarySW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","librarySW", deathChance, "chainmail");
         libraryC = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","libraryC", deathChance, "chainmail");
         
         lowerLibraryS = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","lowerLibraryS", deathChance, "chainmail");
         lowerLibrarySE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","lowerLibrarySE", deathChance, "chainmail");
         lowerLibraryE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","lowerLibraryE", deathChance, "chainmail");
         lowerLibraryNE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","lowerLibraryNE", deathChance, "chainmail");
         lowerLibraryN = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","lowerLibraryN", deathChance, "chainmail");
         lowerLibraryNW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","lowerLibraryNW", deathChance, "chainmail");
         lowerLibraryW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+                            "the hum of magic in the air","lowerLibraryW", deathChance, "chainmail");
         octavoRoom = new LockedRoom("in the room with the great Octavo.  \nIn the center of the room, you see the book bound in"+ 
                             "chans, and can feel the hum of magic in the air.\n You step up to the book, and read the words of the Creator"+
-                            " of the Discworld: \n Ashonai. Ebiris. Urshoring. Kvanti. Pythan. N'gurad. Feringomalee. -.", "Key","");
+                            " of the Discworld: \n Ashonai. Ebiris. Urshoring. Kvanti. Pythan. N'gurad. Feringomalee. -.", "octavoRoom","Key");
         lowerLibraryC = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        field = new Room("in the main courtyard of the Unseen University","");
+                            "the hum of magic in the air","lowerLibraryC", deathChance, "chainmail");
+        field = new Room("in the main courtyard of the Unseen University","field");
         
-        towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you","");
-        towerMain = new RoomWithFloors("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you","",10);
-        towerTop = new Room("at the top of the Tower of Art. You have climbed all 8,888 stairs to get here","");
+        towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you","towerBase");
+        towerMain = new RoomWithFloors("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you","towerMain",10);
+        towerTop = new Room("at the top of the Tower of Art. You have climbed all 8,888 stairs to get here","towerTop");
         
-        mainEntrance = new Room("in the entrance to the main building at the Unseen University","");
-        bathroom = new Room("in the Archchancellor's bathroom, built by Bloody Stupid Johnson","");
-        greatHall = new Room("in the Great Hall of the Unseen University.  Unfortunately, it isn't mealtime now","");
-        kitchen = new Room("in the Unseen University's kitchen","");
+        mainEntrance = new Room("in the entrance to the main building at the Unseen University","mainEntrance");
+        bathroom = new Room("in the Archchancellor's bathroom, built by Bloody Stupid Johnson","bathroom");
+        greatHall = new Room("in the Great Hall of the Unseen University.  Unfortunately, it isn't mealtime now","greatHall");
+        kitchen = new Room("in the Unseen University's kitchen","kitchen");
         
         cellar = new Room("in the cellar below the kitchen. It is somewhat damp, and you see water on the floor from the east","");
         
@@ -170,7 +171,7 @@ public class Game
         towerTop.addItemInitial("Banana",false);
         towerTop.addItemInitial("Apple",false);
         towerTop.addItemInitial("Pen",true);
-        towerTop.addItemInitial("Manuscript",true);
+        towerTop.addItemInitial("Manuscript",false);
         
         
         libraryEntrance.setExit("south",courtyard);

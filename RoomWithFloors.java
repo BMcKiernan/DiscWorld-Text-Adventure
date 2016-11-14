@@ -2,10 +2,13 @@ import java.util.Set;
 import java.util.HashMap;
 import java.util.Iterator;
 /**
- * Write a description of class RoomWithFloors here.
+ * RoomWithFloors is a special case of Room where rather than moving to an adjacent 
+ * room, the movement is tracked within the object to reduce the number of separate rooms
+ * required (and to see how subclasses work)
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/14/26
  */
 public class RoomWithFloors extends Room
 {
@@ -20,12 +23,23 @@ public class RoomWithFloors extends Room
         this.maxFloors=maxFloors;
         currentFloor=1;
     }
+    /**
+     * @return int number of floors in the room
+     */
     public int getMaxFloors() {
         return maxFloors;
     }
+    /**
+     * @return int value of current floor
+     */
     public int getCurrentFloor() {
         return currentFloor;
     }
+    /**
+     * Checks to see that the current floor is within the proper bounds 
+     * to be able to go up
+     * @return boolean of success/fail
+     */
     public boolean goUp(){
         if(currentFloor<maxFloors){
             currentFloor++;
@@ -36,6 +50,11 @@ public class RoomWithFloors extends Room
         }
             
     }
+    /**
+     * Checks to see that the current floor is within the proper bounds 
+     * to be able to go down
+     * @return boolean of success/fail
+     */
     public boolean goDown(){
         if(currentFloor>1){
             currentFloor--;
@@ -46,6 +65,11 @@ public class RoomWithFloors extends Room
         }
             
     }
+    /**
+     * method to move floors within the room, takes a String as the argument,
+     * ignores anything other than up or down, increments or decrements the 
+     * current floor number, then returns a boolean of success/fail
+     */
     public boolean moveFloors(String direction){
         if(direction.equals("up")){
             return goUp();

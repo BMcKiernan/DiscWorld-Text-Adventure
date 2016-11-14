@@ -2,14 +2,16 @@
 /**
  * This is an item class and will help determine the actions that can be implemented with an item.
  * 
- * @author Brian McKiernan Nathan Paget
- * @version 11/11/2016
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/14/26
  */
 public class Item
 {
    boolean equipable;
    String itemName;
    boolean isEquipped;
+   int weight;
    /**
     * Constructor that accepts arguments for Item.
     */
@@ -17,6 +19,7 @@ public class Item
        this.itemName = itemName;
        this.equipable = equipable;
        isEquipped=false;
+       weight=2;
     }
     
    /**
