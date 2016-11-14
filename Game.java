@@ -73,45 +73,33 @@ public class Game
         
         int deathChance=15;
         
-        libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk","libraryEntrance");
-        libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","libraryS", deathChance, "chainmail");
-        librarySE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","librarySE", deathChance, "chainmail");
-        libraryE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","libraryE", deathChance, "chainmail");
-        libraryNE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","libraryNE", deathChance, "chainmail");
-        libraryN = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","libraryN", deathChance, "chainmail");
-        libraryNW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","libraryNW", deathChance, "chainmail");
-        libraryW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","libraryW", deathChance, "chainmail");
-        librarySW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","librarySW", deathChance, "chainmail");
-        libraryC = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","libraryC", deathChance, "chainmail");
+        String libraryDescription="in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air";
+        String lowerDescription="in the basement of the library.  \nYou see towering bookshelves above you, and can hear the hum of magic in the air";
         
-        lowerLibraryS = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","lowerLibraryS", deathChance, "chainmail");
-        lowerLibrarySE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","lowerLibrarySE", deathChance, "chainmail");
-        lowerLibraryE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","lowerLibraryE", deathChance, "chainmail");
-        lowerLibraryNE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","lowerLibraryNE", deathChance, "chainmail");
-        lowerLibraryN = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","lowerLibraryN", deathChance, "chainmail");
-        lowerLibraryNW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","lowerLibraryNW", deathChance, "chainmail");
-        lowerLibraryW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
-                            "the hum of magic in the air","lowerLibraryW", deathChance, "chainmail");
+        libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk","libraryEntrance");
+        
+        libraryS = new RoomWithDeathChance(libraryDescription,"libraryS", deathChance, "chainmail");
+        librarySE = new RoomWithDeathChance(libraryDescription,"librarySE", deathChance, "chainmail");
+        libraryE = new RoomWithDeathChance(libraryDescription,"libraryE", deathChance, "chainmail");
+        libraryNE = new RoomWithDeathChance(libraryDescription,"libraryNE", deathChance, "chainmail");
+        libraryN = new RoomWithDeathChance(libraryDescription,"libraryN", deathChance, "chainmail");
+        libraryNW = new RoomWithDeathChance(libraryDescription,"libraryNW", deathChance, "chainmail");
+        libraryW = new RoomWithDeathChance(libraryDescription,"libraryW", deathChance, "chainmail");
+        librarySW = new RoomWithDeathChance(libraryDescription,"librarySW", deathChance, "chainmail");
+        libraryC = new RoomWithDeathChance(libraryDescription,"libraryC", deathChance, "chainmail");
+        
+        lowerLibraryS = new RoomWithDeathChance(lowerDescription,"lowerLibraryS", deathChance, "chainmail");
+        lowerLibrarySE = new RoomWithDeathChance(lowerDescription,"lowerLibrarySE", deathChance, "chainmail");
+        lowerLibraryE = new RoomWithDeathChance(lowerDescription,"lowerLibraryE", deathChance, "chainmail");
+        lowerLibraryNE = new RoomWithDeathChance(lowerDescription,"lowerLibraryNE", deathChance, "chainmail");
+        lowerLibraryN = new RoomWithDeathChance(lowerDescription,"lowerLibraryN", deathChance, "chainmail");
+        lowerLibraryNW = new RoomWithDeathChance(lowerDescription,"lowerLibraryNW", deathChance, "chainmail");
+        lowerLibraryW = new RoomWithDeathChance(lowerDescription,"lowerLibraryW", deathChance, "chainmail");
+        lowerLibraryC = new RoomWithDeathChance(lowerDescription,"lowerLibraryC", deathChance, "chainmail");
+        
         octavoRoom = new LockedRoom("in the room with the great Octavo.  \nIn the center of the room, you see the book bound in"+ 
                             "chans, and can feel the hum of magic in the air.\n You step up to the book, and read the words of the Creator"+
                             " of the Discworld: \n Ashonai. Ebiris. Urshoring. Kvanti. Pythan. N'gurad. Feringomalee. -.", "octavoRoom","Key");
-        lowerLibraryC = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","lowerLibraryC", deathChance, "chainmail");
         fourEcks = new RoomWithDeathChance("now in a desert land.  You see a sign in the distance reading:\n 'Welcome to XXXX'.\n\n"+
                                            "You hear a noise above you. A drop-bear lands on your head.","fourEcks", 100, "");
         field = new Room("in the main courtyard of the Unseen University","field");
@@ -135,50 +123,41 @@ public class Game
         courtyard.setExit("east",towerBase);
         courtyard.setExit("west",mainEntrance);
         
-        
-        field.setExit("north",courtyard);
-        
+        field.setExit("north",courtyard);        
         
         mainEntrance.setExit("east",courtyard);
         mainEntrance.setExit("west",greatHall);
-        mainEntrance.setExit("south",bathroom);
-        
+        mainEntrance.setExit("south",bathroom);        
         
         greatHall.setExit("east",mainEntrance);
         greatHall.setExit("south",kitchen);
-        
-        
+                
         bathroom.setExit("north",mainEntrance);
-        bathroom.addItemInitial("Key",false);
-        
+        bathroom.addItemInitial("Key",false);        
         
         kitchen.setExit("down",cellar);
         kitchen.setExit("north",greatHall);
         kitchen.addItemInitial("Bread",false);
         kitchen.addItemInitial("Bread",false);
         
-        
         cellar.setExit("up",kitchen);
         cellar.addItemInitial("Mead",false);
         cellar.addItemInitial("Wine",false);
         cellar.addItemInitial("Ham",false);
-        
         
         towerBase.setExit("west",courtyard);
         towerBase.setExit("up",towerMain);
         
         towerMain.setExit("up",towerTop);
         towerMain.setExit("down",towerBase);
-        
-        
+                
         towerTop.setExit("down",towerMain);
         towerTop.addItemInitial("Tray",true);
         towerTop.addItemInitial("Banana",false);
         towerTop.addItemInitial("Apple",false);
         towerTop.addItemInitial("Pen",true);
         towerTop.addItemInitial("Manuscript",false);
-        
-        
+                
         libraryEntrance.setExit("south",courtyard);
         libraryEntrance.setExit("north",libraryS);
         
@@ -243,7 +222,6 @@ public class Game
         lowerLibraryC.setExit("south",lowerLibraryS);
         lowerLibraryC.setExit("east",lowerLibraryE);
         lowerLibraryC.setExit("north",lowerLibraryN);
-
 
         currentRoom = courtyard;  // start game outside
     }
