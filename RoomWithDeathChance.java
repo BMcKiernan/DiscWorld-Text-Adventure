@@ -26,13 +26,12 @@ public class RoomWithDeathChance extends Room
     public boolean isDead(Inventory playerInv)
     {
         
-        //if(playerInv.getItemFromString(safeItem)==null){
-       //     return false;
-        //}
-       // else {
+        if(playerInv.stringFindsItem(safeItem)==null){
             return checkDeathEvent();
-            
-       // }
+        }
+        else {
+            return false;            
+        }
     }
     private boolean checkDeathEvent()
     {

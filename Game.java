@@ -23,8 +23,9 @@ public class Game
     private RoomWithFloors towerRoom;
     private String lastDirection; 
     HashMap<String, String> reverseDirection = new HashMap<>();
-
-    Player player;
+    private boolean isDead;
+    private boolean gameWon;
+    Player Rincewind;
 
     /**
      * Create the game and initialise its internal map.
@@ -33,7 +34,9 @@ public class Game
     {
         createRooms();
         parser = new Parser(); 
-        player = new Player();
+        Rincewind = new Player();
+        isDead=false;
+        gameWon=false;
         
         //reverse direction hashmap
         reverseDirection.put("north","south");
@@ -236,6 +239,14 @@ public class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            if(isDead){
+                finished=true;
+                System.out.println("You have just died.");
+            }
+            if(gameWon){
+                finished=true;
+                System.out.println("You have just won the game.");
+            }
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -370,7 +381,7 @@ public class Game
                 currentRoom = nextRoom;
                 System.out.println(currentRoom.getLongDescription());
                 if(currentRoom instanceof RoomWithDeathChance) {
-                    //System.out.println(((RoomWithDeathChance)currentRoom).isDead(testInv));
+                    isDead=((RoomWithDeathChance)currentRoom).isDead(Rincewind.playerInventory);
                 }
             }
         }
@@ -415,8 +426,8 @@ public class Game
             item = currentRoom.getItem(itemName);
             if(currentRoom.contains(item)==true){
                 currentRoom.removeItem(item);
-                player.addItem(item);
-                    if(player.contains(item)==true){
+                Rincewind.addItem(item);
+                    if(Rincewind.contains(item)==true){
                     System.out.println("The item has been added to your inventory.\n");
                 }
                 else{
