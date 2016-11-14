@@ -252,7 +252,7 @@ public class Game
         // execute them until the game is over.
                 
         boolean finished = false;
-        while (! finished) {
+        while (!finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
             if(isDead){
@@ -290,7 +290,6 @@ public class Game
         boolean wantToQuit = false;
 
         CommandWord commandWord = command.getCommandWord();
-
         switch (commandWord) {
             case UNKNOWN:
                 System.out.println("I don't know what you mean...");
@@ -383,9 +382,6 @@ public class Game
                     currentRoom = nextRoom;
                     System.out.println(currentRoom.getLongDescription());
                 }
-                
-
-            
             }
         }
         else {
@@ -416,7 +412,6 @@ public class Game
                     isDead=((RoomWithDeathChance)currentRoom).isDead(Rincewind.equipment);
                 }
             }
-        
         }
     }
     
@@ -459,7 +454,6 @@ public class Game
                    
                 }
             }
-            
         }
     }
 
@@ -531,8 +525,8 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
+    
     private void equip(Command command){
         Rincewind.equipItemFromString(command.getSecondWord());
-        
     }
 }
