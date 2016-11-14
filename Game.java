@@ -343,8 +343,9 @@ public class Game
                 unequip(command);
                 break;
             
-                //             case DROP:
-                //                 drop(command);
+            case DROP:
+                drop(command);
+                break;
                 
         }
         return wantToQuit;
@@ -453,6 +454,26 @@ public class Game
     private void look()
     {
         System.out.println(currentRoom.getLongDescription());
+    }
+    
+    private void drop(Command command) 
+    {
+        
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't who to give an item
+            System.out.println("Give who what?");
+            return;
+        }
+        else{
+            Item item1= Rincewind.playerInventory.stringFindsItem(command.getSecondWord());
+            if(item1!=null){
+                //Do the trade
+                Rincewind.playerInventory.removeItem(item1);
+                currentRoom.contents.addItem(item1);
+                System.out.println("You just dropped: " + item1.getName()+"\n");
+                
+            }
+        }
     }
     
     private void give(Command command)
