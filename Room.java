@@ -53,7 +53,7 @@ public class Room
      */
     public String getShortDescription()
     {
-        return description;
+        return "You are "+description+".\n";
     }
 
     /**

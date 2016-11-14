@@ -88,16 +88,18 @@ public class Player
      * for the item it then sets that items isEquipped boolean to false, removes the item from the equip array
      * and adds it back to the players inventory. If the item is not equipped this method returns a print statement.
      */
-    public void unEquip(String itemToUnequipString){
+    public void unequip(String itemToUnequipString){
         Item itemToUnequip = equipment.stringFindsItem(itemToUnequipString);
-        if(itemToUnequip.isItemEquipped(itemToUnequip)==true){
-            itemToUnequip.unEquip(itemToUnequip);
-            equipment.removeItem(itemToUnequip);
-            playerInventory.addItem(itemToUnequip);
-            System.out.println("The "+itemToUnequip+" has been unequipped and is back in your inventory");
-        }
-        else{
-            System.out.println("The "+itemToUnequip+" was not equipped and therefore you can't unequip it.");
+        if (itemToUnequip!=null){
+            if(itemToUnequip.isItemEquipped()){
+                itemToUnequip.unequip();
+                equipment.removeItem(itemToUnequip);
+                playerInventory.addItem(itemToUnequip);
+                System.out.println("The "+itemToUnequip.getName()+" has been unequipped and is back in your inventory");
+            }
+            else{
+                System.out.println("The "+itemToUnequip+" was not equipped and therefore you can't unequip it.");
+            }
         }
     }
     

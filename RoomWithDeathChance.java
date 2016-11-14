@@ -42,7 +42,7 @@ public class RoomWithDeathChance extends Room
             Item item =playerEquipment.stringFindsItem(safeItem);
 
             
-            if(item.isItemEquipped(item)) {
+            if(item.isItemEquipped()) {
                 return false;            
             }
             else{
@@ -59,7 +59,7 @@ public class RoomWithDeathChance extends Room
     private boolean checkDeathEvent()
     {
         int  n = rand.nextInt(100) + 1;
-        System.out.println(""+n+" > "+percentChanceOfDeath+"?");
+        //System.out.println(""+n+" > "+percentChanceOfDeath+"?");
         return n<percentChanceOfDeath;
     }
 }
