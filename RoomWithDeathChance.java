@@ -16,9 +16,9 @@ public class RoomWithDeathChance extends Room
     /**
      * Constructor for objects of class RoomWithFloors
      */
-    public RoomWithDeathChance(String description, int percentChanceOfDeath, String safeItem)
+    public RoomWithDeathChance(String description, String roomName, int percentChanceOfDeath, String safeItem)
     {
-        super(description);
+        super(description,roomName);
         this.percentChanceOfDeath=percentChanceOfDeath;
         this.safeItem=safeItem;
         rand = new Random();

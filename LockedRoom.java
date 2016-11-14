@@ -13,9 +13,9 @@ public class LockedRoom extends Room
     /**
      * Constructor for objects of class LockedRoom
      */
-    public LockedRoom(String description, String key)
+    public LockedRoom(String description, String roomName, String key)
     {
-        super(description);
+        super(description,roomName);
         this.keyName=key;
     }
     public String getKeyName() {
