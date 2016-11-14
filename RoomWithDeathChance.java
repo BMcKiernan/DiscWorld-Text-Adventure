@@ -30,7 +30,14 @@ public class RoomWithDeathChance extends Room
             return checkDeathEvent();
         }
         else {
+            Item item =playerInv.stringFindsItem(safeItem);
+            
+            if(item.isItemEquipped(item)) {
             return false;            
+            }
+            else{
+                return false;
+            }
         }
     }
     private boolean checkDeathEvent()
