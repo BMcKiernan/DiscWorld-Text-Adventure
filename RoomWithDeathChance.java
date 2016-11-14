@@ -23,29 +23,28 @@ public class RoomWithDeathChance extends Room
         this.safeItem=safeItem;
         rand = new Random();
     }
+    
     public boolean isDead(Inventory playerInv)
     {
-        
         if(playerInv.stringFindsItem(safeItem)==null){
             return checkDeathEvent();
         }
         else {
-            Item item =playerInv.stringFindsItem(safeItem);
+            Item item = playerInv.stringFindsItem(safeItem);
             
             if(item.isItemEquipped(item)) {
-            return false;            
+                return false;            
             }
             else{
                 return false;
             }
         }
     }
+    
     private boolean checkDeathEvent()
     {
         int  n = rand.nextInt(100) + 1;
         System.out.println(""+n+" > "+percentChanceOfDeath+"?");
         return n<percentChanceOfDeath;
     }
-
- 
 }

@@ -54,6 +54,7 @@ public class Room
     {
         return description;
     }
+    
     public String getRoomName()
     {
         return roomName;
