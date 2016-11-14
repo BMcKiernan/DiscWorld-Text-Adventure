@@ -13,8 +13,9 @@ import java.util.Scanner;
  * the known commands, and if the input is not one of the known commands, it
  * returns a command object that is marked as an unknown command.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/10/26
  */
 public class Parser 
 {
@@ -50,7 +51,7 @@ public class Parser
             if(tokenizer.hasNext()) {
                 word2 = tokenizer.next();      // get second word
                 if(tokenizer.hasNext()) {
-                    word3 = tokenizer.next();
+                    word3 = tokenizer.next();   //get third word
                 // note: we just ignore the rest of the input line.
                 }
             }

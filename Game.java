@@ -12,8 +12,9 @@ import java.util.HashMap;
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kölling and David J. Barnes
- * @version 2016.02.29
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/10/26
  */
 
 public class Game 
@@ -25,6 +26,7 @@ public class Game
     HashMap<String, String> reverseDirection = new HashMap<>();
     private boolean isDead;
     private boolean gameWon;
+    private int interactionCounter;
     Player Rincewind;
     Player Librarian;
 
@@ -41,6 +43,7 @@ public class Game
         Librarian.playerInventory.addItem(item);
         isDead=false;
         gameWon=false;
+        interactionCounter=0;
         //reverse direction hashmap
         reverseDirection.put("north","south");
         reverseDirection.put("south","north");
@@ -62,7 +65,8 @@ public class Game
         RoomWithFloors towerMain;
         RoomWithDeathChance libraryS, librarySE, libraryE, libraryNE, libraryN, libraryNW,
             libraryW, librarySW, libraryC, lowerLibraryS, lowerLibrarySE, lowerLibraryE, 
-            lowerLibraryNE, lowerLibraryN, lowerLibraryNW, lowerLibraryW, lowerLibraryC;
+            lowerLibraryNE, lowerLibraryN, lowerLibraryNW, lowerLibraryW, lowerLibraryC,
+            fourEcks;
         // create the rooms
         LockedRoom octavoRoom;
         courtyard = new Room("in the main courtyard of the Unseen University","courtyard");
@@ -70,54 +74,56 @@ public class Game
         int deathChance=1;
         
         libraryEntrance = new Room("in the entrance of the library.  You see the Librarian at his desk","libraryEntrance");
-        libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        librarySE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        libraryE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        libraryNE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        libraryN = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        libraryNW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        libraryW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        librarySW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        libraryC = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+        libraryS = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","libraryS", deathChance, "chainmail");
+        librarySE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","librarySE", deathChance, "chainmail");
+        libraryE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","libraryE", deathChance, "chainmail");
+        libraryNE = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","libraryNE", deathChance, "chainmail");
+        libraryN = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","libraryN", deathChance, "chainmail");
+        libraryNW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","libraryNW", deathChance, "chainmail");
+        libraryW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","libraryW", deathChance, "chainmail");
+        librarySW = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","librarySW", deathChance, "chainmail");
+        libraryC = new RoomWithDeathChance("in the library.  You see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","libraryC", deathChance, "chainmail");
         
-        lowerLibraryS = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        lowerLibrarySE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        lowerLibraryE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        lowerLibraryNE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        lowerLibraryN = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        lowerLibraryNW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        lowerLibraryW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
+        lowerLibraryS = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","lowerLibraryS", deathChance, "chainmail");
+        lowerLibrarySE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","lowerLibrarySE", deathChance, "chainmail");
+        lowerLibraryE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","lowerLibraryE", deathChance, "chainmail");
+        lowerLibraryNE = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","lowerLibraryNE", deathChance, "chainmail");
+        lowerLibraryN = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","lowerLibraryN", deathChance, "chainmail");
+        lowerLibraryNW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","lowerLibraryNW", deathChance, "chainmail");
+        lowerLibraryW = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear "+ 
+                            "the hum of magic in the air","lowerLibraryW", deathChance, "chainmail");
         octavoRoom = new LockedRoom("in the room with the great Octavo.  \nIn the center of the room, you see the book bound in"+ 
                             "chans, and can feel the hum of magic in the air.\n You step up to the book, and read the words of the Creator"+
-                            " of the Discworld: \n Ashonai. Ebiris. Urshoring. Kvanti. Pythan. N'gurad. Feringomalee. -.", "Key","");
+                            " of the Discworld: \n Ashonai. Ebiris. Urshoring. Kvanti. Pythan. N'gurad. Feringomalee. -.", "octavoRoom","Key");
         lowerLibraryC = new RoomWithDeathChance("in the basement of the library.  \nYou see towering bookshelves above you, and can hear"+ 
-                            "the hum of magic in the air","", deathChance, "chainmail");
-        field = new Room("in the main courtyard of the Unseen University","");
+                            "the hum of magic in the air","lowerLibraryC", deathChance, "chainmail");
+        fourEcks = new RoomWithDeathChance("now in a desert land.  You see a sign in the distance reading:\n 'Welcome to XXXX'.\n\n"+
+                                           "You hear a noise above you. A drop-bear lands on your head.","fourEcks", 100, "");
+        field = new Room("in the main courtyard of the Unseen University","field");
         
-        towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you","");
-        towerMain = new RoomWithFloors("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you","",10);
-        towerTop = new Room("at the top of the Tower of Art. You have climbed all 8,888 stairs to get here","");
+        towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you","towerBase");
+        towerMain = new RoomWithFloors("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you","towerMain",10);
+        towerTop = new Room("at the top of the Tower of Art. You have climbed all 8,888 stairs to get here","towerTop");
         
-        mainEntrance = new Room("in the entrance to the main building at the Unseen University","");
-        bathroom = new Room("in the Archchancellor's bathroom, built by Bloody Stupid Johnson","");
-        greatHall = new Room("in the Great Hall of the Unseen University.  Unfortunately, it isn't mealtime now","");
-        kitchen = new Room("in the Unseen University's kitchen","");
+        mainEntrance = new Room("in the entrance to the main building at the Unseen University","mainEntrance");
+        bathroom = new Room("in the Archchancellor's bathroom, built by Bloody Stupid Johnson","bathroom");
+        greatHall = new Room("in the Great Hall of the Unseen University.  Unfortunately, it isn't mealtime now","greatHall");
+        kitchen = new Room("in the Unseen University's kitchen","kitchen");
         
         cellar = new Room("in the cellar below the kitchen. It is somewhat damp, and you see water on the floor from the east","");
         
@@ -170,7 +176,7 @@ public class Game
         towerTop.addItemInitial("Banana",false);
         towerTop.addItemInitial("Apple",false);
         towerTop.addItemInitial("Pen",true);
-        towerTop.addItemInitial("Manuscript",true);
+        towerTop.addItemInitial("Manuscript",false);
         
         
         libraryEntrance.setExit("south",courtyard);
@@ -190,6 +196,7 @@ public class Game
         
         libraryNE.setExit("south",libraryE);
         libraryNE.setExit("west",libraryN);
+        libraryNE.setExit("east",fourEcks);
         
         libraryN.setExit("south",libraryC);
         libraryN.setExit("east",libraryNE);
@@ -263,6 +270,11 @@ public class Game
                 finished=true;
                 System.out.println("You have just won the game.");
             }
+            if(interactionCounter>5){
+                finished=true;
+                System.out.println("The Librarian gets frustrated with your continuing interactions with him.\n "+
+                                   "He jumps at your face and rips it off. \n\nYou have just died.");
+            }
         }
         System.out.println("Thank you for playing.  Good bye.");
     }
@@ -277,7 +289,7 @@ public class Game
         System.out.println("Discworld is a fascinating and magical, yet dangerout place.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
-        System.out.println(currentRoom.getLongDescription());
+        System.out.println(currentRoom.getShortDescription());
     }
 
     /**
@@ -326,6 +338,10 @@ public class Game
             case EQUIP:
                 equip(command);
                 break;
+                
+            case UNEQUIP:
+                unequip(command);
+                break;
             
                 //             case DROP:
                 //                 drop(command);
@@ -363,52 +379,68 @@ public class Game
         }
         
         String direction = command.getSecondWord();
-        //if(command.getSecondWord();)
         lastDirection = direction;
+        // If our current room is a RoomWithFloor
         if(currentRoom instanceof RoomWithFloors) {
+            //Attempt to move floors in the given direction.
             if(((RoomWithFloors)currentRoom).moveFloors(direction)){
+                //if true was returned, we have succesfully moved
                 System.out.println("You walk "+direction);
-                System.out.println(currentRoom.getLongDescription());
+                System.out.println(currentRoom.getShortDescription());
             }
             
             else{      
+                //If false was returned, we could have an invalid direction or be at the top or bottom
                 Room nextRoom = currentRoom.getExit(direction);
                 Room prevRoom = currentRoom;
+                //Now we try to move to the next room in a direction
                 if (nextRoom == null) {
+                    //We had an invalid directional command
                     System.out.println("There is no door!");
                 }
                 else {
+                    //We were at the top or bottom and successfully exited the multi-floor room
                     System.out.println("You walk  "+direction);
                     currentRoom = nextRoom;
-                    System.out.println(currentRoom.getLongDescription());
+                    System.out.println(currentRoom.getShortDescription());
                 }
             }
         }
+        //Next room is a single-floor room
         else {
             // Try to leave current room.
             Room nextRoom = currentRoom.getExit(direction);
             Room prevRoom = currentRoom;
-    
+            //Now we test the next room for a couple conditions
             if (nextRoom == null) {
+                //There was no next room in that direction
                 System.out.println("There is no door!");
             }
+            
             else if(nextRoom instanceof LockedRoom) {
-                    if(Rincewind.playerInventory.stringFindsItem(((LockedRoom)nextRoom).getKeyName())==null){
-                        System.out.println("The way is shut.  You must find a key to enter");
-                    } 
-                    
-                    else {
-                        System.out.println("You walk "+direction);
-                        currentRoom = nextRoom;
-                        System.out.println(currentRoom.getLongDescription());
-                        gameWon=true;
-                    }
+                //The next room is actually a locked room, so we check to see if we can unlock it
+                //We look in the player's inventory for the item known by the room to be require to unlock the door
+                if(Rincewind.playerInventory.stringFindsItem(((LockedRoom)nextRoom).getKeyName())==null){
+                    //We could not find the item in the player's inventory
+                    System.out.println("The way is shut.  You must find a key to enter");
+                }                     
+                else {
+                    //The required item was found, the player moves to that room
+                    System.out.println("You walk "+direction);
+                    currentRoom = nextRoom;
+                    System.out.println(currentRoom.getShortDescription());
+                    //Since the only locked room is the end, we can just set the win condition here
+                    gameWon=true;
+                }
                 }
             else {
+                //The next room is valid and unlocked, so we move to that room
                 System.out.println("You walk "+direction);
                 currentRoom = nextRoom;
-                System.out.println(currentRoom.getLongDescription());
+                System.out.println(currentRoom.getShortDescription());
+                //Our next room could kill the player, so we see if it's a room that could kill them
                 if(currentRoom instanceof RoomWithDeathChance) {
+                    //We pass the player's inventory to the room to see if they have the necessary item equipped
                     isDead=((RoomWithDeathChance)currentRoom).isDead(Rincewind.equipment);
                 }
             }
@@ -426,19 +458,27 @@ public class Game
     private void give(Command command)
     {
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
+            // if there is no second word, we don't who to give an item
             System.out.println("Give who what?");
             return;
         }
         else if(!command.hasThirdWord()) {
+            // if there is no third word, we don't know what to give
             System.out.println("Give " + command.getSecondWord() + "to whom?");
         }
         else {
+            // Currently a little hacky, but checks that the current room is the library entrance and that you 
+            // are trying to give an item to the Librarian
             if(command.getSecondWord().equals("Librarian")&&currentRoom.getRoomName().equals("libraryEntrance")) {
+                interactionCounter++;
+                // Checks that the player is trying to give the Librarian a banana
                 if(command.getThirdWord().equals("Banana") ){
+                    // Find the banana in the player's inventory, and the chainmail in the Librarian's
                     Item item1= Rincewind.playerInventory.stringFindsItem(command.getThirdWord());
                     Item item2=Librarian.playerInventory.stringFindsItem("chainmail");
+                    //Test to see if the player has a banana, or if they already got the chainmail from the Librarian
                     if(item1!=null&&item2!=null){
+                        //Do the trade
                         Rincewind.playerInventory.removeItem(item1);
                         Librarian.playerInventory.removeItem(item2);
                         Librarian.playerInventory.addItem(item1);
@@ -446,7 +486,19 @@ public class Game
                         
                     }
                     else {
-                        System.out.println("You do not have a "+command.getThirdWord());
+                        if(item1==null&&item2==null){
+                            //Neither have anything to trade
+                            System.out.println("The Librarian looks at you confusedly, and OOKs at you");
+                            
+                        }
+                        else if(item1==null){
+                            //The player has no item to give
+                            System.out.println("You do not have a "+command.getThirdWord());
+                        }
+                        else if(item2==null){
+                            //The Librarian has no item to give
+                            System.out.println("The Librarian has already given you his chainmail");
+                        }
                     }
                }
                else {
@@ -506,7 +558,7 @@ public class Game
         else {
             currentRoom = lastRoom;
             lastDirection = directionBack;
-            System.out.println(currentRoom.getLongDescription());
+            System.out.println(currentRoom.getShortDescription());
         }
     }
     
@@ -529,11 +581,21 @@ public class Game
     /**
      * This method calls the uneEquip method from player which uses the isEquipped method fromthe Item class.
      */
-    private void unEquip(Command command){
-        Rincewind.unEquip(command.getSecondWord());
+    private void unequip(Command command){
+        if(!command.hasSecondWord()) {
+            System.out.println("Unequip what?");
+        }
+        else {
+            Rincewind.unequip(command.getSecondWord());
+        }
     }
     
     private void equip(Command command){
-        Rincewind.equipItemFromString(command.getSecondWord());
+        if(!command.hasSecondWord()) {
+            System.out.println("Equip what?");
+        }
+        else {
+            Rincewind.equipItemFromString(command.getSecondWord());
+        }
     }
 }

@@ -2,14 +2,16 @@
 /**
  * This is an item class and will help determine the actions that can be implemented with an item.
  * 
- * @author Brian McKiernan Nathan Paget
- * @version 11/11/2016
+ * @author Brian McKiernan
+ * @Nathan Paget
+ * @version 11/14/26
  */
 public class Item
 {
    boolean equipable;
    String itemName;
    boolean isEquipped;
+   int weight;
    /**
     * Constructor that accepts arguments for Item.
     */
@@ -17,6 +19,7 @@ public class Item
        this.itemName = itemName;
        this.equipable = equipable;
        isEquipped=false;
+       weight=2;
     }
     
    /**
@@ -39,13 +42,8 @@ public class Item
    /**
     * This method checks to see if an Item is equipped.
     */
-   public boolean isItemEquipped(Item itemToCheck){
-       if(isEquipped==true){
-           return true;
-        }
-        else{
-           return false;
-        }
+   public boolean isItemEquipped(){
+       return isEquipped;
    }
    
    /**
@@ -62,8 +60,8 @@ public class Item
            System.out.println("You cannot equip item: "+itemToEquip.getName());
     }
     
-   public void unEquip(Item itemToUnequip){
-       if(isItemEquipped(itemToUnequip) == true){
+   public void unequip(){
+       if(isItemEquipped() ){
            isEquipped = false;
        }
     }
