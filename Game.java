@@ -23,13 +23,14 @@ public class Game
     private Room currentRoom;
     private RoomWithFloors towerRoom;
     private String lastDirection; 
+    private String tempDirection;
     HashMap<String, String> reverseDirection = new HashMap<>();
     private boolean isDead;
     private boolean gameWon;
     private int interactionCounter;
     Player Rincewind;
     Player Librarian;
-
+    
     /**
      * Create the game and initialise its internal map.
      */
@@ -369,6 +370,7 @@ public class Game
         }
         
         String direction = command.getSecondWord();
+        tempDirection=lastDirection;
         lastDirection = direction;
         // If our current room is a RoomWithFloor
         if(currentRoom instanceof RoomWithFloors) {
@@ -387,6 +389,7 @@ public class Game
                 if (nextRoom == null) {
                     //We had an invalid directional command
                     System.out.println("There is no door!");
+                    lastDirection=tempDirection;
                 }
                 else {
                     //We were at the top or bottom and successfully exited the multi-floor room
@@ -405,6 +408,7 @@ public class Game
             if (nextRoom == null) {
                 //There was no next room in that direction
                 System.out.println("There is no door!");
+                lastDirection=tempDirection;
             }
             
             else if(nextRoom instanceof LockedRoom) {
@@ -559,9 +563,9 @@ public class Game
      */
     private void goBack()    
     {
-        System.out.println(lastDirection);
-        String directionBack = reverseDirection.get(lastDirection);
         
+        String directionBack = reverseDirection.get(lastDirection);
+        System.out.println("You walk " + directionBack);
         Room lastRoom = currentRoom.getExit(directionBack);
         if (lastRoom == null) {
             System.out.println("There is no door!");
