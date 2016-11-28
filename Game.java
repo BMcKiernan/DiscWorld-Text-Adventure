@@ -13,7 +13,7 @@ import java.util.HashMap;
  *  executes the commands that the parser returns.
  * 
  * @author Brian McKiernan
- * @Nathan Paget
+ * @author Nathan Paget
  * @version 11/10/26
  */
 
@@ -69,9 +69,12 @@ public class Game
             fourEcks;
         // create the rooms
         LockedRoom octavoRoom;
+        
+        
         courtyard = new Room("in the main courtyard of the Unseen University","courtyard");
         
         int deathChance=15;
+        int numFloors=8;
         
         String libraryDescription="in the library.  You see towering bookshelves above you, and can hear the hum of magic in the air";
         String lowerDescription="in the basement of the library.  \nYou see towering bookshelves above you, and can hear the hum of magic in the air";
@@ -102,10 +105,10 @@ public class Game
                             " of the Discworld: \n Ashonai. Ebiris. Urshoring. Kvanti. Pythan. N'gurad. Feringomalee. -.", "octavoRoom","Key");
         fourEcks = new RoomWithDeathChance("now in a desert land.  You see a sign in the distance reading:\n 'Welcome to XXXX'.\n\n"+
                                            "You hear a noise above you. A drop-bear lands on your head.","fourEcks", 100, "");
-        field = new Room("in the main courtyard of the Unseen University","field");
+        field = new Room("at the foot-the-ball field of the Unseen University.  You see the leftovers from a crazy game, but nothing much else.","field");
         
         towerBase = new Room("in the base of the Tower of Art.  You see many flights of stairs above you","towerBase");
-        towerMain = new RoomWithFloors("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you","towerMain",10);
+        towerMain = new RoomWithFloors("somewhere on the staircase in the Tower of Art.  The stairs strech above and below you","towerMain",numFloors);
         towerTop = new Room("at the top of the Tower of Art. You have climbed all 8,888 stairs to get here","towerTop");
         
         mainEntrance = new Room("in the entrance to the main building at the Unseen University","mainEntrance");
@@ -264,7 +267,7 @@ public class Game
     {
         System.out.println();
         System.out.println("Welcome to Discworld!");
-        System.out.println("Discworld is a fascinating and magical, yet dangerout place.");
+        System.out.println("Discworld is a fascinating and magical, yet dangerous place.");
         System.out.println("Type '" + CommandWord.HELP + "' if you need help.");
         System.out.println();
         System.out.println(currentRoom.getShortDescription());
@@ -323,6 +326,14 @@ public class Game
             
             case DROP:
                 drop(command);
+                break;
+                
+            case INVENTORY:
+                inventory();
+                break;
+            
+            case INV:
+                inventory();
                 break;
                 
         }
@@ -439,7 +450,7 @@ public class Game
         
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't who to give an item
-            System.out.println("Give who what?");
+            System.out.println("Drop what?");
             return;
         }
         else{
@@ -471,7 +482,7 @@ public class Game
             if(command.getSecondWord().equals("Librarian")&&currentRoom.getRoomName().equals("libraryEntrance")) {
                 interactionCounter++;
                 // Checks that the player is trying to give the Librarian a banana
-                if(command.getThirdWord().equals("Banana") ){
+                if(command.getThirdWord().equalsIgnoreCase("Banana") ){
                     // Find the banana in the player's inventory, and the chainmail in the Librarian's
                     Item item1= Rincewind.playerInventory.stringFindsItem(command.getThirdWord());
                     Item item2=Librarian.playerInventory.stringFindsItem("chainmail");
@@ -483,6 +494,7 @@ public class Game
                         Librarian.playerInventory.addItem(item1);
                         Rincewind.playerInventory.addItem(item2);
                         
+                        System.out.println("The Librarian takes the banana, and as thanks, gifts you with chainmail");
                     }
                     else {
                         if(item1==null&&item2==null){
@@ -580,7 +592,8 @@ public class Game
     /**
      * This method calls the uneEquip method from player which uses the isEquipped method fromthe Item class.
      */
-    private void unequip(Command command){
+    private void unequip(Command command)
+    {
         if(!command.hasSecondWord()) {
             System.out.println("Unequip what?");
         }
@@ -589,12 +602,19 @@ public class Game
         }
     }
     
-    private void equip(Command command){
+    private void equip(Command command)
+    {
         if(!command.hasSecondWord()) {
             System.out.println("Equip what?");
         }
         else {
             Rincewind.equipItemFromString(command.getSecondWord());
         }
+    }
+    
+    private void inventory()
+    {
+        Rincewind.playerInventory.printContents();   
+        
     }
 }

@@ -90,4 +90,15 @@ public class Inventory
         }
         return itemToFind;
     }
+    
+    public void printContents()
+    {
+        System.out.println("\nThe contents of your inventory are:");
+        for(Item item: inventory){
+            System.out.println(item.getName());
+        }
+        System.out.println("");
+        
+        
+    }
 }
